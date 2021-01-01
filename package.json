@@ -1,0 +1,33 @@
+{
+  "name": "flash",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install-all": "yarn install && yarn --cwd client install",
+    "test": "run-s test_client",
+    "test_client": "yarn --cwd client test --watch-all=false",
+    "client": "npm run start --prefix client",
+    "dev": "npm run client",
+    "start": "npm run client"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^5.1.0"
+  },
+  "devDependencies": {
+    "husky": "^4.3.0",
+    "jest-extended": "^0.11.5",
+    "jest-matcher-utils": "^26.0.1",
+    "prettier": "^2.1.2",
+    "pretty-quick": "^3.0.2",
+    "yarn-run-all": "^3.1.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  }
+}

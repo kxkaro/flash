@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\kompose\kompose.exe convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: flash-web
+  name: flash-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: flash-web
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\kompose\kompose.exe convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: flash-web
+    spec:
+      containers:
+      - image: kxkaro/flash-client
+        imagePullPolicy: ""
+        name: flash-web
+        ports:
+        - containerPort: 80
+        resources: {}
+        stdin: true
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}
