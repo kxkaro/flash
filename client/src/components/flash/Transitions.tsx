@@ -1,4 +1,5 @@
 import React from "react";
+import clsx from 'clsx';
 import { useTransition, animated, config } from "react-spring";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 
@@ -17,9 +18,11 @@ const useStyles = makeStyles((theme: Theme) =>
 interface Props {
   components: Array<any>;
   index: number;
+  style?: any;
+  className?: any;
 }
 
-export const Transitions = ({ components, index }: Props) => {
+export const Transitions = ({ components, index, style,className }: Props) => {
   const classes = useStyles();
 
   // if index is greater than the length of the slidesData array, show the last slide
@@ -38,7 +41,11 @@ export const Transitions = ({ components, index }: Props) => {
   return (
     <>
       {transitions.map(({ item, props, key }) => (
-        <animated.div key={key} style={props} className={`${classes.content}`}>
+        <animated.div 
+          key={key} 
+          style={{ ...props, ...style }} 
+          className={clsx(classes.content, className)}
+        >
           {item}
         </animated.div>
       ))}

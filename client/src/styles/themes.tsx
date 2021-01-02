@@ -81,13 +81,13 @@ const createTheme = (type: Mode, appId: string) => {
       ...common.palette,
       primary: {
         light: "#000000",
-        main: "#000000",
+        main: "#F72585",
         dark: "#000000",
         contrastText: "rgba(255, 255, 255, .87)",
       },
       secondary: {
         light: "#000000",
-        main: "#000000",
+        main: "#2D00F7",
         dark: "#000000",
         contrastText: "rgba(255, 255, 255, .60)",
       },

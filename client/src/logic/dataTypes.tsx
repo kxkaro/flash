@@ -39,9 +39,9 @@ interface GameDataItem {
     developers: Array<Developer>;
     platforms: Array<Platform>;
     logo?: string;
-    cover?: string;
-    background?: Array<string>;
-    video?: string;
+    cover: string;
+    background: Array<string>;
+    video: string;
     cars: Array<CarDataItem>;
     revenue: Measure;
     qty: Measure;
@@ -60,7 +60,7 @@ interface CarDataItem {
 type CarData = Array<CarDataItem>;
 
 type FlashData = {
-    games?: GameData;
+    games: GameData;
 }
 
 export type {
