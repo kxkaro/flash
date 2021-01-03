@@ -252,6 +252,8 @@ type Metric =
 // | "Ring System"
 // | "Global Magnetic Field";
 
+type TransitionVariant = "fade-in" | "slide-in";
+
 export type {
   Value,
   Dimension,
@@ -287,4 +289,5 @@ export type {
   SlideDataItem,
   Header,
   Metric,
+  TransitionVariant,
 };

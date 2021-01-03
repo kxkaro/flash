@@ -101,6 +101,48 @@ import nfs_17_garage from '../img/nfs/17_0_garage.jpg';
 import nfs_17_2 from '../img/nfs/17_2.jpg';
 import nfs_17_3 from '../img/nfs/17_3.jpg';
 import nfs_17_1 from '../img/nfs/17_1.jpg';
+import nfs_18_cover from '../img/nfs/18_0_cover.jpg';
+import nfs_18_ui from '../img/nfs/18_0_ui.jpg';
+import nfs_18_garage from '../img/nfs/18_0_garage.jpg';
+import nfs_18_2 from '../img/nfs/18_2.jpg';
+import nfs_18_3 from '../img/nfs/18_3.jpg';
+import nfs_18_1 from '../img/nfs/18_1.jpg';
+import nfs_19_cover from '../img/nfs/19_0_cover.jpg';
+import nfs_19_ui from '../img/nfs/19_0_ui.jpg';
+import nfs_19_garage from '../img/nfs/19_0_garage.jpg';
+import nfs_19_2 from '../img/nfs/19_2.jpg';
+import nfs_19_3 from '../img/nfs/19_3.jpg';
+import nfs_19_1 from '../img/nfs/19_1.jpg';
+import nfs_20_cover from '../img/nfs/20_0_cover.jpg';
+import nfs_20_ui from '../img/nfs/20_0_ui.jpg';
+import nfs_20_garage from '../img/nfs/20_0_garage.jpg';
+import nfs_20_2 from '../img/nfs/20_2.jpg';
+import nfs_20_3 from '../img/nfs/20_3.jpg';
+import nfs_20_1 from '../img/nfs/20_1.jpg';
+import nfs_21_cover from '../img/nfs/21_0_cover.jpg';
+import nfs_21_ui from '../img/nfs/21_0_ui.jpg';
+import nfs_21_garage from '../img/nfs/21_0_garage.jpg';
+import nfs_21_2 from '../img/nfs/21_2.jpg';
+import nfs_21_3 from '../img/nfs/21_3.jpg';
+import nfs_21_1 from '../img/nfs/21_1.jpg';
+import nfs_22_cover from '../img/nfs/22_0_cover.jpg';
+import nfs_22_ui from '../img/nfs/22_0_ui.jpg';
+import nfs_22_garage from '../img/nfs/22_0_garage.jpg';
+import nfs_22_2 from '../img/nfs/22_2.jpg';
+import nfs_22_3 from '../img/nfs/22_3.jpg';
+import nfs_22_1 from '../img/nfs/22_1.jpg';
+import nfs_23_cover from '../img/nfs/23_0_cover.jpg';
+import nfs_23_ui from '../img/nfs/23_0_ui.jpg';
+import nfs_23_garage from '../img/nfs/23_0_garage.jpg';
+import nfs_23_2 from '../img/nfs/23_2.jpg';
+import nfs_23_3 from '../img/nfs/23_3.jpg';
+import nfs_23_1 from '../img/nfs/23_1.jpg';
+import nfs_24_cover from '../img/nfs/24_0_cover.jpg';
+import nfs_24_ui from '../img/nfs/24_0_ui.jpg';
+import nfs_24_garage from '../img/nfs/24_0_garage.jpg';
+import nfs_24_2 from '../img/nfs/24_2.jpg';
+import nfs_24_3 from '../img/nfs/24_3.jpg';
+import nfs_24_1 from '../img/nfs/24_1.jpg';
 
 const nfs: Dimension = {
   key: "NFS",
@@ -444,8 +486,8 @@ const NEED_FOR_SPEED: FlashData = {
       platforms: ["PC", "PS3", "Xbox 360", "Wii", "3DS"],
       cover:
         "https://upload.wikimedia.org/wikipedia/en/7/7c/Needforspeedtheruncover.jpg",
-      background: [],
-      video: "",
+        background: [nfs_18_cover, nfs_18_ui, nfs_18_garage, nfs_18_1, nfs_18_2, nfs_18_3],
+      video: "https://www.youtube.com/watch?v=0VqBlcSs1Lk&ab_channel=GameRiot",
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
@@ -460,8 +502,8 @@ const NEED_FOR_SPEED: FlashData = {
       platforms: ["PC", "PS3", "Xbox 360", "PS Vita", "Wii U", "Mobile"],
       cover:
         "https://upload.wikimedia.org/wikipedia/en/b/b0/Nfs-most-wanted-2012-gen-packart.jpg",
-      background: [],
-      video: "",
+        background: [nfs_19_cover, nfs_19_ui, nfs_19_garage, nfs_19_1, nfs_19_2, nfs_19_3],
+      video: "https://www.youtube.com/watch?v=5nOQelXLgPY&t=10s&ab_channel=VideoGamesTV",
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
@@ -476,8 +518,8 @@ const NEED_FOR_SPEED: FlashData = {
       platforms: ["PC", "PS4", "Xbox One", "PS3", "Xbox 360"],
       cover:
         "https://upload.wikimedia.org/wikipedia/en/e/e5/Need_for_Speed_Rivals_cover.jpg",
-      background: [],
-      video: "",
+        background: [nfs_20_cover, nfs_20_ui, nfs_20_garage, nfs_20_1, nfs_20_2, nfs_20_3],
+      video: "https://www.youtube.com/watch?v=CHlQeZ2V6i0&ab_channel=WorldofLongplays",
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
@@ -490,10 +532,9 @@ const NEED_FOR_SPEED: FlashData = {
       year: "2015",
       developers: ["Firemonkeys Studios"],
       platforms: ["Android", "iOS"],
-      cover:
-        "https://upload.wikimedia.org/wikipedia/en/5/59/Need_for_Speed_No_Limits_cover_art.jpeg",
-      background: [],
-      video: "",
+      cover: "https://upload.wikimedia.org/wikipedia/en/5/59/Need_for_Speed_No_Limits_cover_art.jpeg",
+      background: [nfs_21_cover, nfs_21_ui, nfs_21_garage, nfs_21_1, nfs_21_2, nfs_21_3],
+      video: "https://www.youtube.com/watch?v=KC19SVDzDJ4&ab_channel=TRNSPRTR",
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
@@ -507,9 +548,9 @@ const NEED_FOR_SPEED: FlashData = {
       developers: ["Ghost Games"],
       platforms: ["PC", "PS4", "Xbox One"],
       cover:
-        "https://upload.wikimedia.org/wikipedia/en/a/a9/Need_for_Speed_2015.jpg",
-      background: [],
-      video: "",
+        "https://upload.wikimedia.org/wikipedia/en/a/a9/Need_for_Speed_2015.jpg", 
+      background: [nfs_22_cover, nfs_22_ui, nfs_22_garage, nfs_22_1, nfs_22_2, nfs_22_3],
+      video: "https://www.youtube.com/watch?v=B5mfZ0mYy8U&ab_channel=GameRiot",
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
@@ -524,8 +565,8 @@ const NEED_FOR_SPEED: FlashData = {
       platforms: ["PC", "PS4", "Xbox One"],
       cover:
         "https://upload.wikimedia.org/wikipedia/en/6/64/Need_for_Speed_Payback_standard_edition_cover_art.jpg",
-      background: [],
-      video: "",
+        background: [nfs_23_cover, nfs_23_ui, nfs_23_garage, nfs_23_1, nfs_23_2, nfs_23_3],
+      video: "https://www.youtube.com/watch?v=FVJy5tytTH0&ab_channel=GameRiot",
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
@@ -540,8 +581,8 @@ const NEED_FOR_SPEED: FlashData = {
       platforms: ["PC", "PS4", "Xbox One"],
       cover:
         "https://upload.wikimedia.org/wikipedia/en/7/7f/Cover_Art_of_Need_for_Speed_Heat.png",
-      background: [],
-      video: "",
+        background: [nfs_24_cover, nfs_24_ui, nfs_24_garage, nfs_24_1, nfs_24_2, nfs_24_3],
+      video: "https://www.youtube.com/watch?v=l0X3moJYuq8&ab_channel=Reiji",
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
