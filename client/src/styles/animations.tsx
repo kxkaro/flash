@@ -6,6 +6,12 @@ export const animations = {
       transform: "none",
     },
   },
+  "@keyframes no-transform-skew": {
+    "100%": {
+      opacity: 1,
+      transform: "skew(-15deg)",
+    },
+  },
   "@keyframes no-filter": {
     "100%": {
       filter: "none",
@@ -53,5 +59,13 @@ export const animations = {
     opacity: 1,
     transform: "translateY(0)",
     animationPlayState: "paused",
+  },
+  "@keyframes no-transform-skew-pause": {
+    "100%": {
+      opacity: 1,
+      transform: "skew(-15deg)",
+      animationPlayState: "paused",
+      animationDelay: "2s",
+    },
   },
 };

@@ -5,7 +5,6 @@ import FlashLayout from "../layouts/Flash";
 import { TitleLogoBar } from "../layouts/Header";
 import { LoadingFullScreen } from "../components/Loading";
 import { Slideshow2 } from "../components/flash/Slideshow2";
-import { FooterTicker } from "../components/flash/FooterTicker";
 import { Mode, User } from "../logic/types";
 import { FlashData } from "../logic/dataTypes";
 import { NEED_FOR_SPEED } from '../constants/nfsData';
@@ -29,29 +28,29 @@ const Flash2 = ({
     id = id?.toLowerCase();
 
     // Delay the transitions 5 seconds, when all CSS transitions are finished
-    let [play, setPlay] = useState(false);
+    let [play, setPlay] = useState(true);
     let [init, setInit] = useState(false);
 
-    useEffect(() => {
-        // if (!data) {
-        //   getData();
-        // }
+    // useEffect(() => {
+    //     // if (!data) {
+    //     //   getData();
+    //     // }
 
-        // Init is used to pause css animations
-        // Delay play until entry animations are finished
-        if (!init && data) {
-            const timeout = setTimeout(() => {
-                setPlay(true);
-                setInit(true);
-            }, 5000);
+    //     // Init is used to pause css animations
+    //     // Delay play until entry animations are finished
+    //     if (!init && data) {
+    //         const timeout = setTimeout(() => {
+    //             setPlay(true);
+    //             setInit(true);
+    //         }, 5000);
 
-            return () => clearTimeout(timeout);
-        }
-    }, [
-        init,
-        data,
-        // getData
-    ]);
+    //         return () => clearTimeout(timeout);
+    //     }
+    // }, [
+    //     init,
+    //     data,
+    //     // getData
+    // ]);
 
     const appId = id as string;
 
@@ -75,12 +74,11 @@ const Flash2 = ({
             }
         >
             <Slideshow2
-                    init={init}
-                    play={play}
-                    setPlay={setPlay}
-                    appId={appId}
-                    data={NEED_FOR_SPEED}
-                />
+                play={play}
+                setPlay={setPlay}
+                appId={appId}
+                data={NEED_FOR_SPEED}
+            />
         </FlashLayout>
     ) : (
             <FlashLayout

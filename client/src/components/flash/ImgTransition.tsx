@@ -1,91 +1,101 @@
 import React, { useState, useEffect } from "react";
 import { Img } from 'react-image';
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
-import { Grid, Hidden, Box, Typography } from "@material-ui/core";
-import { Player } from "../navigation/Player";
 import { Transitions } from "./Transitions";
-import { GameDataItem } from "../../logic/dataTypes";
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((t) =>
     createStyles({
-        content: {
-            width: "98vw",
-            marginTop: "2vh",
-            position: "relative",
-        },
-        chartContainer: {
-            height: "100%",
+        bgContainer: {
+            position: "fixed",
+            left: 0,
+            top: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: -5,
             display: "flex",
-            alignItems: "center",
             justifyContent: "center",
+            '&::before': {
+                content: "''",
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                top: "auto",
+                height: "12.5vh",
+                backgroundColor: "black",
+            },
+            '&::after': {
+                content: "''",
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: "auto",
+                height: "12.5vh",
+                backgroundColor: "black",
+            },
         },
-        divider: {
-            marginTop: ".5em",
-            marginBottom: ".5em",
+        imgBg: {
+            zIndex: -2,
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "calc(100vh - 10em)",
+            margin: "5em auto",
+            objectFit: "cover",
+            filter: "blur(20px)",
+        },
+        img: {
+            zIndex: -1,
+            position: "absolute",
+            height: "75vh",
+            margin: "12.5vh auto",
+            // filter: "drop-shadow(16px 16px 20px)",
         },
     })
 );
 
 interface Props {
-    init: boolean;
-    play: boolean;
-    totalDuration: number;
-    n: number;
-    data: GameDataItem;
+    sources: Array<string>;
+    duration: number;
+    outerIndex: number;
 }
 
 export const ImgTransition = ({
-    init,
-    play,
-    data,
-    totalDuration,
-    n,
+    sources,
+    duration,
+    outerIndex
 }: Props) => {
     const classes = useStyles();
-    const [duration, setDuration] = useState(Math.floor(totalDuration / n));
-    
-    // Change index every 'duration' seconds. Index is used to display current slide in Transitions
     const [index, setIndex] = useState(0);
+    
 
     useEffect(() => {
-        if (play) {
-            const interval = setInterval(() => {
-                setIndex((prev) => (prev + 1) % n);
-            }, duration);
+        const interval = setInterval(() => {
+            setIndex(prev => (prev + 1) % sources.length);
+        }, duration);
+        
+        return () => clearInterval(interval);
+    })
 
-            return () => {
-                clearInterval(interval);
-            };
+    useEffect(() => {
+        if (outerIndex === 0) {
+            setIndex(0);
         }
-    }, [play, data, duration, n]);
-    console.log(data.background[index])
+    }, [outerIndex])
+
     return (
-        <Box>
-            {/* Blurred bg - could also use a pseudo element */}
-            <Img src={data.background[index]} style={{
-                zIndex: -2,
-                position: "fixed",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "80%",
-                margin: "5% auto",
-                objectFit: "cover",
-                filter: "blur(10px)",
-            }} />
-            <Img src={data.background[index]} style={{
-                zIndex: -1,
-                position: "fixed",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "80%",
-                margin: "5% auto",
-                objectFit: "contain",
-            }} />
-            <Typography variant="h1" style={{ color: "white" }}>
-                {data.game.text}
-            </Typography>
-        </Box>
+        <Transitions
+            className={classes.bgContainer}
+            index={index}
+            variant="fade-in"
+            components={sources.map((src, i) => (
+                <>
+                    <Img src={src} key={`${src}-${i}-bg`} className={classes.imgBg} />
+                    <Img src={src} key={`${src}-${i}`} className={classes.img} />
+                </>
+            ))}
+        />
     );
 };
