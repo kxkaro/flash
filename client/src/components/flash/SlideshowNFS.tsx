@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import { makeStyles, Theme, createStyles, withStyles } from "@material-ui/core/styles";
 import { Grid, Box } from "@material-ui/core";
 import { Player } from "../navigation/Player";
 import { TitlePanels } from './TitlePanels';
@@ -7,6 +7,8 @@ import { ImgTransition } from './ImgTransition';
 import { Transitions } from "./Transitions";
 import { FlashData } from "../../logic/dataTypes";
 import { formatNumber } from '../../utils/numberFormat';
+import { Rating } from "@material-ui/lab";
+import { Tooltip } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -81,15 +83,43 @@ export const SlideshowNFS = ({
         "They told me to delete it...",
         "Voices in my head tell me it's a lot..."
     ];
+
+    const StyledRating = withStyles((theme: Theme) => ({
+        iconFilled: {
+          color: theme.palette.primary.main,
+        },
+        iconHover: {
+          color: theme.palette.primary.main,
+        },
+        iconEmpty: {
+            color: theme.palette.primary.main,
+            opacity: .4,
+        }
+      }))(Rating);
+
+    const rating = (n: number) =>
+        <Box style={{ marginTop: ".4vh"}} component="fieldset" mb={3} borderColor="transparent">
+            <Tooltip title="Metacritic Rating" arrow interactive>
+                <StyledRating 
+                    name="metacritic-rating-10" 
+                    defaultValue={n / 10} max={10} 
+                    precision={0.1}
+                    readOnly
+                />
+            </Tooltip>
+        </Box>
+
     const ui = data.games.map((slide, ind) => (
         <TitlePanels
             primary={{ name: `#${ind + 1}`, body: slide.game.text }}
-            // TODO: add rating stars
+            primaryContent={slide?.rating ? rating(slide.rating) : undefined}
             secondary={{ name: "Year", body: slide.year }}
-            tertiary={{ name: "Sales", body: Number(slide.qty.value) > 0 ? 
-                `${formatNumber(slide.qty.value, 1000000, 1)} M ${slide.qty.unit}` : 
-                unknownTx[Math.floor(Math.random() * unknownTx.length)] }}
-            quaternary={{ name: "Developers", body: slide.developers.join(", ")}}
+            tertiary={{
+                name: "Sales", body: Number(slide.qty.value) > 0 ?
+                    `${formatNumber(slide.qty.value, 1000000, 1)} M ${slide.qty.unit}` :
+                    unknownTx[Math.floor(Math.random() * unknownTx.length)]
+            }}
+            quaternary={{ name: "Developers", body: slide.developers.join(", ") }}
         />
     ));
 

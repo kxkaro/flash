@@ -18,13 +18,13 @@ const useStyles = makeStyles((theme: Theme) =>
                 marginLeft: "-5vw",
             },
             '& $card:nth-child(1)': {
-                height: "14vh",
+                height: "15vh",
             },
             '& $card:nth-child(2)': {
                 height: "12vh",
             },
             '& $card:nth-child(3)': {
-                height: "11vh",
+                height: "12vh",
             },
             '& $card:nth-child(4)': {
                 padding: ".8em 2rem",
@@ -138,6 +138,7 @@ interface Text {
 
 interface Props {
     primary: Text;
+    primaryContent?: any;
     secondary: Text;
     tertiary: Text;
     quaternary: Text;
@@ -145,6 +146,7 @@ interface Props {
 
 export const TitlePanels = ({
     primary,
+    primaryContent,
     secondary,
     tertiary,
     quaternary,
@@ -198,6 +200,8 @@ export const TitlePanels = ({
                         <Typography color="inherit" className={classes.text}>
                             {body}
                         </Typography>
+                        
+                        {i === 0 && primaryContent}
                     </animated.div>
                 ))}
             </div>
