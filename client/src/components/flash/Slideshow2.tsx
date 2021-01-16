@@ -18,28 +18,6 @@ const useStyles = makeStyles((theme: Theme) =>
             top: 0,
             height: "100vh",
             width: "100%",
-            '&::before': {
-                content: "''",
-                zIndex: 1,
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: "auto",
-                height: "12.5vh",
-                backgroundColor: "black",
-            },
-            '&::after': {
-                content: "''",
-                zIndex: 1,
-                position: "absolute",
-                bottom: 0,
-                left: 0,
-                right: 0,
-                top: "auto",
-                height: "12.5vh",
-                backgroundColor: "black",
-            },
         }
     })
 );

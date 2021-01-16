@@ -1,10 +1,37 @@
 import React, { useState, useEffect } from "react";
+import clsx from 'clsx';
 import { Img } from 'react-image';
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { Transitions } from "./Transitions";
 
 const useStyles = makeStyles((t) =>
     createStyles({
+        container: {
+            position: "relative",
+            top: 0,
+            height: "100vh",
+            width: "100%",
+            '&::before': {
+                content: "''",
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: "auto",
+                height: "12.5vh",
+                backgroundColor: "black",
+            },
+            '&::after': {
+                content: "''",
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                top: "auto",
+                height: "12.5vh",
+                backgroundColor: "black",
+            },
+        },
         bgContainer: {
             position: "fixed",
             left: 0,
@@ -31,8 +58,33 @@ const useStyles = makeStyles((t) =>
             position: "absolute",
             height: "75vh",
             margin: "12.5vh auto",
-            // filter: "drop-shadow(16px 16px 20px)",
+            boxShadow: "10px 10px 10em rgba(0, 0, 0, .6)",
         },
+        progress: {
+            zIndex: 10,
+            position: "absolute",
+            top: "5vh",
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "flex-start",
+        },
+        progressItem: {
+            width: "1vh",
+            height: "1vh",
+            borderRadius: "50%",
+            backgroundColor: "rgba(255, 255, 255, .4)",
+            margin: "1em",
+            fontSize: "8px",
+            cursor: "pointer",
+            '&:hover': {
+                backgroundColor: "rgba(255, 255, 255, .87)",
+            },
+            '&$active': {
+                backgroundColor: "rgba(255, 255, 255, .87)",
+            }
+        },
+        active: {},
     })
 );
 
@@ -49,13 +101,13 @@ export const ImgTransition = ({
 }: Props) => {
     const classes = useStyles();
     const [index, setIndex] = useState(0);
-    
+
 
     useEffect(() => {
         const interval = setInterval(() => {
             setIndex(prev => (prev + 1) % sources.length);
         }, duration);
-        
+
         return () => clearInterval(interval);
     })
 
@@ -66,16 +118,27 @@ export const ImgTransition = ({
     }, [outerIndex])
 
     return (
-        <Transitions
-            className={classes.bgContainer}
-            index={index}
-            variant="fade-in"
-            components={sources.map((src, i) => (
-                <>
-                    <Img src={src} key={`${src}-${i}-bg`} className={classes.imgBg} />
-                    <Img src={src} key={`${src}-${i}`} className={classes.img} />
-                </>
-            ))}
-        />
+        <div className={classes.container}>
+            <div className={classes.progress}>
+                {sources.map((source, i) => (
+                    <span 
+                        className={clsx(classes.progressItem, { [classes.active]: i === index})} 
+                        onClick={() => setIndex(i)}
+                    />
+                ))}
+            </div>
+
+            <Transitions
+                className={classes.bgContainer}
+                index={index}
+                variant="fade-in"
+                components={sources.map((src, i) => (
+                    <>
+                        <Img src={src} key={`${src}-${i}-bg`} className={classes.imgBg} />
+                        <Img src={src} key={`${src}-${i}`} className={classes.img} />
+                    </>
+                ))}
+            />
+        </div>
     );
 };
