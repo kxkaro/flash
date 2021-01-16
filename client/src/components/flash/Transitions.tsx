@@ -28,7 +28,7 @@ export const Transitions = ({ variant = "fade-in", components, index, style, cla
   const classes = useStyles();
 
   // if index is greater than the length of the slidesData array, show the last slide
-  const ind = index < components.length ? index : components.length - 1;
+  const ind = index < components.length ? index : components.length - 1; 
 
 
 
@@ -51,7 +51,7 @@ export const Transitions = ({ variant = "fade-in", components, index, style, cla
       leave: { opacity: 0, transform: "translateX(-100vw)" },
       config: config.stiff,
     },
-    "swipe-cube-horizontal": {
+    "swipe-cube-to-left": {
       from: {
         position: "fixed",
         transform: "translate(100%) perspective(100vw) translateZ(-25vw) rotateY(90deg)",
@@ -70,6 +70,28 @@ export const Transitions = ({ variant = "fade-in", components, index, style, cla
         transformOrigin: "right",
         transformStyle: "preserve-3d",
         opacity: 0
+      },
+      config: config.slow
+    },
+    "swipe-cube-to-right": {
+      from: {
+        transform: "translate(-100%) perspective(100vw) translateZ(-25vw) rotateY(-90deg)", 
+        transformOrigin: "right",
+        transformStyle: "preserve-3d",
+        opacity: 0
+      },
+      enter: {
+        transform: "translate(0%) perspective(100vw) translateZ(0vw) rotateY(0deg)",
+        transformOrigin: "center",
+        transformStyle: "preserve-3d",
+        opacity: 1,
+      },
+      leave: {
+        position: "fixed",
+        transform: "translate(100%) perspective(100vw) translateZ(-25vw) rotateY(90deg)",
+        transformOrigin: "left",
+        transformStyle: "preserve-3d",
+        opacity: 0,
       },
       config: config.slow
     },

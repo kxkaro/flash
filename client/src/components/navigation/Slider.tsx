@@ -94,7 +94,7 @@ export const Slider = ({
           labels ? labels[value - 1] : value
         }
         onChange={(event: object, value: number | number[]) =>
-          setIndex(Number(value) - 1)
+          setIndex(Number(value) - 1, index)
         }
         className={classes.slider}
       />

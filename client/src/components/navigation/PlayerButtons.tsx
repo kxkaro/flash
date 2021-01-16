@@ -84,7 +84,7 @@ export const PlayerButtons = ({
             color="inherit"
             aria-label="previous"
             onClick={() =>
-              setIndex(index > 0 ? index - 1 : length - 1)
+              setIndex(index > 0 ? index - 1 : length - 1, index)
             }
             className={classes.icon}
           >
@@ -107,7 +107,7 @@ export const PlayerButtons = ({
             color="inherit"
             aria-label="next"
             onClick={() =>
-              setIndex((index < length - 1 ? index + 1 : 0))
+              setIndex(index < length - 1 ? index + 1 : 0, index)
             }
             className={classes.icon}
           >

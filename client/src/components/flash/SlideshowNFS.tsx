@@ -51,11 +51,15 @@ export const SlideshowNFS = ({
 
     // Change index every 'duration' seconds. This influences current game selection
     const [index, setIndex] = useState(0);
+    const [prevIndex, setPrevIndex] = useState(0);
 
     useEffect(() => {
         if (play) {
             const interval = setInterval(() => {
-                setIndex(prev => (prev + 1) % totalLen);
+                setIndex(prev => {
+                    setPrevIndex(prev);
+                    return (prev + 1) % totalLen
+                });
             }, duration);
 
             return () => {
@@ -122,14 +126,14 @@ export const SlideshowNFS = ({
             quaternary={{ name: "Developers", body: slide.developers.join(", ") }}
         />
     ));
-
+console.log(index, prevIndex, totalLen)
     return (
         <Grid container justify="center">
             <Grid container item className={classes.content}>
 
                 <Box className={classes.cinema}>
                     <Transitions
-                        variant="swipe-cube-horizontal"
+                        variant={(index < prevIndex || (prevIndex === 0 && index === (totalLen-1))) ? "swipe-cube-to-right" : "swipe-cube-to-left"}
                         components={backgrounds}
                         index={index}
                     />
@@ -148,7 +152,10 @@ export const SlideshowNFS = ({
                     setPlay={setPlay}
                     index={index}
                     length={totalLen}
-                    setIndex={(n: number) => setIndex(n)}
+                    setIndex={(n: number, prev: number) => {
+                        setIndex(n);
+                        setPrevIndex(prev);
+                    }}
                     duration={duration}
                     setDuration={setDuration}
                     labels={labels}

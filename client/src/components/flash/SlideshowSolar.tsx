@@ -73,6 +73,7 @@ export const SlideshowSolar = ({
 
   // Change index every 'duration' seconds. Index is used to display current slide in Transitions
   const [index, setIndex] = useState(0);
+  const [prevIndex, setPrevIndex] = useState(0);
 
   useEffect(() => {
     if (play) {
@@ -173,7 +174,10 @@ export const SlideshowSolar = ({
           setPlay={setPlay}
           index={index}
           length={totalLen}
-          setIndex={setIndex}
+          setIndex={(n: number, prev: number) => {
+            setIndex(n);
+            setPrevIndex(prev);
+          }}
           duration={duration}
           setDuration={setDuration}
           labels={labels}
