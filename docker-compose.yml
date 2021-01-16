@@ -1,6 +1,6 @@
 version: '3'
 services:
-  web:
+  flash-web:
     image: kxkaro/flash-client
     build: ./client
     restart: always

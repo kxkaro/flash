@@ -94,7 +94,7 @@ export const Transitions = ({ variant = "fade-in", components, index, style, cla
         opacity: 0,
       },
       config: config.slow
-    },
+    }
   }
 
   const transition = transitionsDef[variant];
