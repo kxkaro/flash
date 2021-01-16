@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import clsx from 'clsx';
 import { Img } from 'react-image';
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { Transitions } from "./Transitions";
 
-const useStyles = makeStyles((t) =>
+const useStyles = makeStyles(() =>
     createStyles({
         container: {
             position: "relative",
@@ -15,8 +15,8 @@ const useStyles = makeStyles((t) =>
                 content: "''",
                 position: "absolute",
                 top: 0,
-                left: 0,
-                right: 0,
+                left: "-20%",
+                right: "-20%",
                 bottom: "auto",
                 height: "12.5vh",
                 backgroundColor: "black",
@@ -25,8 +25,8 @@ const useStyles = makeStyles((t) =>
                 content: "''",
                 position: "absolute",
                 bottom: 0,
-                left: 0,
-                right: 0,
+                left: "-20%",
+                right: "-20%",
                 top: "auto",
                 height: "12.5vh",
                 backgroundColor: "black",
@@ -52,6 +52,7 @@ const useStyles = makeStyles((t) =>
             margin: "5em auto",
             objectFit: "cover",
             filter: "blur(20px)",
+            overflow: "hidden",
         },
         img: {
             zIndex: -1,
@@ -85,43 +86,57 @@ const useStyles = makeStyles((t) =>
             }
         },
         active: {},
+        playIcon: {
+            borderRadius: 0,
+        },
     })
 );
 
 interface Props {
+    play: boolean;
     sources: Array<string>;
     duration: number;
     outerIndex: number;
 }
 
+// TODO: Create a gear handle component for progress indicator
 export const ImgTransition = ({
+    play,
     sources,
     duration,
     outerIndex
 }: Props) => {
     const classes = useStyles();
     const [index, setIndex] = useState(0);
+    // const [play, setPlay] = useState(true);
 
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setIndex(prev => (prev + 1) % sources.length);
+            if (play) {
+                setIndex(prev => (prev + 1) % sources.length);
+            }
         }, duration);
 
         return () => clearInterval(interval);
-    })
+    }, [play, duration, sources])
 
     useEffect(() => {
         if (outerIndex === 0) {
             setIndex(0);
         }
-    }, [outerIndex])
+    }, [outerIndex, duration])
 
     return (
         <div className={classes.container}>
             <div className={classes.progress}>
+                {/* <span 
+                    className={clsx(classes.progressItem, classes.playIcon)} 
+                    onClick={() => setPlay(prev => !prev)}    
+                /> */}
                 {sources.map((source, i) => (
                     <span 
+                        key={i}
                         className={clsx(classes.progressItem, { [classes.active]: i === index})} 
                         onClick={() => setIndex(i)}
                     />

@@ -39,8 +39,8 @@ const Landing = ({ user, mode, setMode }: Props) => {
   const yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
 
   const items = {
-    "solar-system": "Solar System",
-    "need-for-speed": "Need For Speed",
+    "solar-system": "Solar Flash",
+    "need-for-speed": "Need For Flash",
   };
 
   const captions = [

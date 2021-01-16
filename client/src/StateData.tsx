@@ -1,4 +1,8 @@
-import { StateDataMap, Scaling, Decimals } from "./logic/types";
+import { 
+  StateDataMap, 
+  // Scaling, 
+  Decimals 
+} from "./logic/types";
 import { SlideData, Value, Metric } from "./logic/types";
 import {
   PLANET_IMG,
@@ -8,21 +12,21 @@ import {
 } from "./constants/solarSysData";
 import { formatNumber } from "./utils/numberFormat";
 
-const formatDelta = (
-  n: string | number,
-  scaling: Scaling,
-  decimals: Decimals,
-  suffix?: string
-) =>
-  `${
-    isNaN(Number(n))
-      ? undefined
-      : Number(n) >= 1000
-      ? ">+999"
-      : Number(n) <= -1000
-      ? "<-999"
-      : `${Number(n) > 0 ? "+" : ""}${formatNumber(n, scaling, decimals)}`
-  }${suffix ? ` ${suffix}` : undefined}`;
+// const formatDelta = (
+//   n: string | number,
+//   scaling: Scaling,
+//   decimals: Decimals,
+//   suffix?: string
+// ) =>
+//   `${
+//     isNaN(Number(n))
+//       ? undefined
+//       : Number(n) >= 1000
+//       ? ">+999"
+//       : Number(n) <= -1000
+//       ? "<-999"
+//       : `${Number(n) > 0 ? "+" : ""}${formatNumber(n, scaling, decimals)}`
+//   }${suffix ? ` ${suffix}` : undefined}`;
 
 /*
     Create state data methods
@@ -49,7 +53,7 @@ const getAvg = (arr: Array<number>) => {
 };
 
 const suffix = "×E";
-const suffixExt = " × E";
+// const suffixExt = " × E";
 
 const planetNames = Object.keys(METRIC_DATA);
 const arr = new Array(

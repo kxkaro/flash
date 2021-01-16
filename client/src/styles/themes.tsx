@@ -108,7 +108,12 @@ const createTheme = (type: Mode, appId: string) => {
     },
     typography: {
       ...common.typography,
-      fontFamily: ["Open Sans", "Arial"].join(","),
+      fontFamily: [
+        // "Inconsolata", 
+        "Roboto-Mono", 
+        "Open Sans", 
+        "Arial"
+      ].join(","),
     },
   };
 

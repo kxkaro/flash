@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { withPush } from "../utils/routingDecorators";
 import FlashLayout from "../layouts/Flash";
 import { TitleLogoBar } from "../layouts/Header";
 import { LoadingFullScreen } from "../components/Loading";
-import { Slideshow2 } from "../components/flash/Slideshow2";
+import { SlideshowNFS } from "../components/flash/SlideshowNFS";
 import { Mode, User } from "../logic/types";
 import { FlashData } from "../logic/dataTypes";
 import { NEED_FOR_SPEED } from '../constants/nfsData';
@@ -29,28 +29,6 @@ const Flash2 = ({
 
     // Delay the transitions 5 seconds, when all CSS transitions are finished
     let [play, setPlay] = useState(true);
-    let [init, setInit] = useState(false);
-
-    // useEffect(() => {
-    //     // if (!data) {
-    //     //   getData();
-    //     // }
-
-    //     // Init is used to pause css animations
-    //     // Delay play until entry animations are finished
-    //     if (!init && data) {
-    //         const timeout = setTimeout(() => {
-    //             setPlay(true);
-    //             setInit(true);
-    //         }, 5000);
-
-    //         return () => clearTimeout(timeout);
-    //     }
-    // }, [
-    //     init,
-    //     data,
-    //     // getData
-    // ]);
 
     const appId = id as string;
 
@@ -61,19 +39,18 @@ const Flash2 = ({
             mode={mode}
             setMode={setMode}
             appId={appId}
-            bgIndex={0}
             header={
                 <TitleLogoBar
                     play={play}
                     appId={appId}
-                    title={`_NEED_FOR_FLASH`}
-                    titleShort={`_NFS_FLASH`}
+                    title={`NEED-FOR-FLASH`}
+                    titleShort={`NFS-FLASH`}
                     subtitle={``}
                     backIcon={true}
                 />
             }
         >
-            <Slideshow2
+            <SlideshowNFS
                 play={play}
                 setPlay={setPlay}
                 appId={appId}

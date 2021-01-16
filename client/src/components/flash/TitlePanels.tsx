@@ -2,10 +2,8 @@ import React, { useRef, RefObject } from "react";
 import { animations } from '../../styles/animations';
 import clsx from 'clsx';
 import { useSpring, useChain, config, animated, SpringHandle } from "react-spring";
-// import { Img } from 'react-image';
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { Box, Typography } from "@material-ui/core";
-import { Children } from '../../logic/types';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -38,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
             },
         },
         card: {
-            backgroundColor: "rgba(0, 0, 0, .4)",
+            backgroundColor: "rgba(0, 0, 0, .6)",
             width: "30%",
             margin: ".5em",
             border: "solid 1px white",
@@ -50,47 +48,47 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         decor: {
             '&$left': {
-                left: "calc(0% - .8rem - 5px)",
+                left: "calc(0% - 1.3rem - 5px)",
                 position: "absolute",
                 top: "-1px",
                 bottom: "-1px",
                 right: "auto",
-                width: ".8rem",
+                width: "1.2rem",
                 backgroundColor: "rgba(0, 0, 0, .4)",
                 border: "solid 1px white",
                 opacity: .8,
                 '&::before': {
                     content: "''",
-                    left: "calc(0% - .6rem - 6px)",
+                    left: "calc(0% - 1rem - 6px)",
                     position: "absolute",
                     top: "-1px",
                     bottom: "-1px",
                     right: "auto",
-                    width: ".6rem",
+                    width: ".9rem",
                     backgroundColor: "rgba(0, 0, 0, .4)",
                     border: "solid 1px white",
                     opacity: .6,
                 },
                 '&::after': {
                     content: "''",
-                    left: "calc(0% - .9rem - 14px)",
+                    left: "calc(0% - 1.6rem - 14px)",
                     position: "absolute",
                     top: "-1px",
                     bottom: "-1px",
                     right: "auto",
-                    width: ".3rem",
+                    width: ".4rem",
                     backgroundColor: "rgba(0, 0, 0, .4)",
                     border: "solid 1px white",
                     opacity: .4,
                 },
             },
             '&$right': {
-                left: "calc(100% + 5px)",
+                left: "calc(100% + 8px)",
                 position: "absolute",
                 top: "-1px",
                 bottom: "-1px",
                 right: "auto",
-                width: ".8rem",
+                width: "1.2rem",
                 backgroundColor: "rgba(0, 0, 0, .4)",
                 border: "solid 1px white",
                 opacity: .8,
@@ -101,19 +99,19 @@ const useStyles = makeStyles((theme: Theme) =>
                     top: "-1px",
                     bottom: "-1px",
                     right: "auto",
-                    width: ".6rem",
+                    width: ".9rem",
                     backgroundColor: "rgba(0, 0, 0, .4)",
                     border: "solid 1px white",
                     opacity: .6,
                 },
                 '&::after': {
                     content: "''",
-                    left: "calc(100% + .6rem + 14px)",
+                    left: "calc(100% + .9rem + 14px)",
                     position: "absolute",
                     top: "-1px",
                     bottom: "-1px",
                     right: "auto",
-                    width: ".3rem",
+                    width: ".4rem",
                     backgroundColor: "rgba(0, 0, 0, .4)",
                     border: "solid 1px white",
                     opacity: .4,
@@ -122,21 +120,34 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         left: {},
         right: {},
-        title: {},
+        title: {
+            fontWeight: "bold",
+        },
+        text: {
+            fontSize: "2vh",
+            textTransform: "uppercase",
+        },
         ...animations
     })
 );
 
+interface Text {
+    name: string;
+    body: string;
+}
+
 interface Props {
-    primary: string;
-    secondary: string;
-    tertiary: string;
+    primary: Text;
+    secondary: Text;
+    tertiary: Text;
+    quaternary: Text;
 }
 
 export const TitlePanels = ({
     primary,
     secondary,
     tertiary,
+    quaternary,
 }: Props) => {
     const classes = useStyles();
 
@@ -161,7 +172,6 @@ export const TitlePanels = ({
     const ref2 = useRef(null);
     const ref3 = useRef(null);
     const ref4 = useRef(null);
-    const refs = [ref1, ref2, ref3];
     const style1 = useAnimation(ref1);
     const style2 = useAnimation(ref2);
     const style3 = useAnimation(ref3);
@@ -169,32 +179,27 @@ export const TitlePanels = ({
     const styles = [style1, style2, style3, style4];
 
 
-    useChain([ref1, ref2, ref3, ref4], [.5, .8, 1.2, 1.8]);
+    useChain([ref1, ref2, ref3, ref4], [.5, .8, 1.2, 1.6]);
 
 
     return (
         <Box className={classes.container}>
             <div style={{ transform: "skew(-15deg" }}>
-                {[primary, secondary, tertiary].map((tx, i) => (
+                {[primary, secondary, tertiary, quaternary].map(({ name, body }, i) => (
+
                     <animated.div key={`anim-${i}`} style={styles[i]} className={clsx(classes.card)}>
+
                         <span className={clsx(classes.decor, classes.left)} />
                         <span className={clsx(classes.decor, classes.right)} />
-                        <Typography variant="h6" color={i === 0 ? "primary" : "inherit"} className={classes.title}>
-                            {tx}
+
+                        <Typography color="primary" className={clsx(classes.text, classes.title)}>
+                            {name}
+                        </Typography>
+                        <Typography color="inherit" className={classes.text}>
+                            {body}
                         </Typography>
                     </animated.div>
                 ))}
-
-                <animated.div style={style4} className={clsx(classes.card)}>
-                    <span className={clsx(classes.decor, classes.left)} />
-                    <span className={clsx(classes.decor, classes.right)} />
-                    <Typography variant="h6" color="primary" className={classes.title}>
-                        Sales
-                </Typography>
-                    <Typography variant="h6" color="inherit" className={classes.title}>
-                        1 M copies
-                </Typography>
-                </animated.div>
             </div>
         </Box>
     );

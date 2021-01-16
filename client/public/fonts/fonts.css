@@ -10,3 +10,22 @@
   font-style: normal;
   src: url("./Goldman/Goldman-Bold.ttf");
 }
+@font-face {
+  font-family: "Roboto-Mono";
+  font-weight: normal;
+  font-style: normal;
+  src: url("./Roboto/RobotoMono-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: "Roboto-Mono-Italic";
+  font-weight: normal;
+  font-style: italic;
+  src: url("./Roboto/RobotoMono-Italic-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: "Inconsolata";
+  font-weight: normal;
+  font-style: normal;
+  src: url("./Inconsolata/Inconsolata-VariableFont_wdth,wght.ttf");
+}

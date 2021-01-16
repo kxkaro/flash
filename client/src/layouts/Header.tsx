@@ -1,5 +1,4 @@
 import React from "react";
-import { Img } from "react-image";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { animations } from "../styles/animations";
 import { Link } from "../utils/Link";
@@ -33,6 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     title: {
       fontSize: theme.fontSizes.primary,
+      zIndex: 10,
       marginTop: "1vh",
       [theme.breakpoints.down("sm")]: {
         fontSize: theme.fontSizes.secondary,
@@ -51,6 +51,7 @@ const useStyles = makeStyles((theme: Theme) =>
       // zIndex: -1,
     },
     iconButton: {
+      zIndex: 10,
       marginTop: "1.5vh",
       marginRight: "1vh",
       height: "4vh",
@@ -147,19 +148,15 @@ export const TitleLogoBar = ({
   const classes = useStyles();
 
   // TODO:
-  const logos = {
-    "solar-system": "",
-    "need-for-speed": "",
-    default: "",
-  };
+  // const logos = {
+  //   "solar-system": "",
+  //   "need-for-speed": "",
+  //   default: "",
+  // };
 
   if (!titleShort) {
     titleShort = title;
   }
-
-  const style = {
-    cursor: "pointer",
-  };
 
   return (
     <Grid

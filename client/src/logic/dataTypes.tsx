@@ -45,6 +45,7 @@ interface GameDataItem {
     cars: Array<CarDataItem>;
     revenue: Measure;
     qty: Measure;
+    rating?: number;
 }
 
 type GameData = Array<GameDataItem>;

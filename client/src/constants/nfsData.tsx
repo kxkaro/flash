@@ -149,7 +149,7 @@ const nfs: Dimension = {
   text: "Need For Speed",
 };
 
-const testNumber = "12345678";
+const testNumber = "";
 
 // fixed list is applied in order to assure that all tiles show a game from the same year at the same time
 const DECADES = {
@@ -210,7 +210,7 @@ const NEED_FOR_SPEED: FlashData = {
       video: "https://www.youtube.com/watch?v=Dur8Dzgtbv4&t=501s&ab_channel=iGameplay1337",
       cars: [],
       revenue: { value: "", unit: "USD" },
-      qty: { value: testNumber, unit: "pc" },
+      qty: { value: testNumber, unit: "copies" },
     },
     {
       game: { key: `${nfs.key}_2`, text: "Need for Speed II" },
@@ -226,7 +226,7 @@ const NEED_FOR_SPEED: FlashData = {
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
-      qty: { value: testNumber, unit: "pc" },
+      qty: { value: testNumber, unit: "copies" },
     },
     {
       game: { key: `${nfs.key}_3`, text: "Need for Speed III: Hot Pursuit" },
@@ -242,7 +242,7 @@ const NEED_FOR_SPEED: FlashData = {
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
-      qty: { value: "1700000", unit: "pc" },
+      qty: { value: "1700000", unit: " copies" },
     },
     {
       game: { key: `${nfs.key}_4`, text: "Need for Speed: High Stakes" },
@@ -258,7 +258,7 @@ const NEED_FOR_SPEED: FlashData = {
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
-      qty: { value: "1390000", unit: "pc" },
+      qty: { value: "1390000", unit: "copies" },
     },
     {
       game: { key: `${nfs.key}_5`, text: "Need for Speed: Porsche Unleashed" },
@@ -274,7 +274,7 @@ const NEED_FOR_SPEED: FlashData = {
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
-      qty: { value: testNumber, unit: "pc" },
+      qty: { value: testNumber, unit: "copies" },
     },
     {
       game: { key: `${nfs.key}_6`, text: "Need for Speed: Hot Pursuit 2" },
@@ -289,7 +289,7 @@ const NEED_FOR_SPEED: FlashData = {
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
-      qty: { value: "1160000", unit: "pc" },
+      qty: { value: "1160000", unit: "copies" },
     },
     {
       game: { key: `${nfs.key}_7`, text: "Need for Speed: Underground" },
@@ -305,7 +305,7 @@ const NEED_FOR_SPEED: FlashData = {
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
-      qty: { value: "15000000", unit: "pc" },
+      qty: { value: "15000000", unit: "copies" },
     },
     {
       game: { key: `${nfs.key}_8`, text: "Need for Speed: Underground 2" },
@@ -321,7 +321,7 @@ const NEED_FOR_SPEED: FlashData = {
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
-      qty: { value: "7000000", unit: "pc" },
+      qty: { value: "7000000", unit: "copies" },
     },
     {
       game: { key: `${nfs.key}_9`, text: "Need for Speed: Most Wanted" },
@@ -337,7 +337,7 @@ const NEED_FOR_SPEED: FlashData = {
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
-      qty: { value: "16000000", unit: "pc" },
+      qty: { value: "16000000", unit: "copies" },
     },
     {
       game: { key: `${nfs.key}_10`, text: "Need for Speed: Carbon" },
@@ -364,7 +364,7 @@ const NEED_FOR_SPEED: FlashData = {
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
-      qty: { value: "3200000", unit: "pc" },
+      qty: { value: "3200000", unit: "copies" },
     },
     {
       game: { key: `${nfs.key}_11`, text: "Need for Speed: ProStreet" },
@@ -380,7 +380,7 @@ const NEED_FOR_SPEED: FlashData = {
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
-      qty: { value: "2400000", unit: "pc" },
+      qty: { value: "2400000", unit: "copies" },
     },
     {
       game: { key: `${nfs.key}_12`, text: "Need for Speed: Undercover" },
@@ -396,7 +396,7 @@ const NEED_FOR_SPEED: FlashData = {
       video: "https://www.youtube.com/watch?v=tAmCVyQ8MPc&ab_channel=DSTRYR",
       logo: "",
       revenue: { value: "", unit: "USD" },
-      qty: { value: "5200000", unit: "pc" },
+      qty: { value: "5200000", unit: "copies" },
     },
     {
       game: { key: `${nfs.key}_13`, text: "Need for Speed: Shift" },
@@ -412,7 +412,7 @@ const NEED_FOR_SPEED: FlashData = {
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
-      qty: { value: "390000", unit: "pc" },
+      qty: { value: "390000", unit: "copies" },
     },
     {
       game: { key: `${nfs.key}_14`, text: "Need for Speed: Nitro" },
@@ -428,7 +428,7 @@ const NEED_FOR_SPEED: FlashData = {
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
-      qty: { value: testNumber, unit: "pc" },
+      qty: { value: testNumber, unit: "copies" },
     },
     {
       game: { key: `${nfs.key}_15`, text: "Need for Speed: World" },
@@ -444,7 +444,7 @@ const NEED_FOR_SPEED: FlashData = {
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
-      qty: { value: testNumber, unit: "pc" },
+      qty: { value: testNumber, unit: "copies" },
     },
     {
       game: { key: `${nfs.key}_16`, text: "Need for Speed: Hot Pursuit" },
@@ -460,7 +460,8 @@ const NEED_FOR_SPEED: FlashData = {
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
-      qty: { value: "5000000", unit: "pc" },
+      qty: { value: "5000000", unit: "copies" },
+      rating: 86,
     },
     {
       game: { key: `${nfs.key}_17`, text: "Shift 2: Unleashed" },
@@ -475,7 +476,7 @@ const NEED_FOR_SPEED: FlashData = {
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
-      qty: { value: testNumber, unit: "pc" },
+      qty: { value: testNumber, unit: "copies" },
     },
     {
       game: { key: `${nfs.key}_18`, text: "Need for Speed: The Run" },
@@ -491,7 +492,7 @@ const NEED_FOR_SPEED: FlashData = {
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
-      qty: { value: testNumber, unit: "pc" },
+      qty: { value: testNumber, unit: "copies" },
     },
     {
       game: { key: `${nfs.key}_19`, text: "Need for Speed: Most Wanted" },
@@ -507,7 +508,7 @@ const NEED_FOR_SPEED: FlashData = {
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
-      qty: { value: "509000", unit: "pc" },
+      qty: { value: "509000", unit: "copies" },
     },
     {
       game: { key: `${nfs.key}_20`, text: "Need for Speed: Rivals" },
@@ -523,7 +524,8 @@ const NEED_FOR_SPEED: FlashData = {
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
-      qty: { value: "4000000", unit: "pc" },
+      qty: { value: "4000000", unit: "copies" },
+      rating: 80,
     },
     {
       game: { key: `${nfs.key}_21`, text: "Need for Speed: No Limits" },
@@ -538,7 +540,7 @@ const NEED_FOR_SPEED: FlashData = {
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
-      qty: { value: testNumber, unit: "pc" },
+      qty: { value: testNumber, unit: "copies" },
     },
     {
       game: { key: `${nfs.key}_22`, text: "Need for Speed" },
@@ -554,7 +556,8 @@ const NEED_FOR_SPEED: FlashData = {
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
-      qty: { value: testNumber, unit: "pc" },
+      qty: { value: testNumber, unit: "copies" },
+      rating: 66,
     },
     {
       game: { key: `${nfs.key}_23`, text: "Need for Speed Payback" },
@@ -570,7 +573,8 @@ const NEED_FOR_SPEED: FlashData = {
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
-      qty: { value: testNumber, unit: "pc" },
+      qty: { value: testNumber, unit: "copies" },
+      rating: 62,
     },
     {
       game: { key: `${nfs.key}_23`, text: "Need for Speed Heat" },
@@ -586,7 +590,8 @@ const NEED_FOR_SPEED: FlashData = {
       logo: "",
       cars: [],
       revenue: { value: "", unit: "USD" },
-      qty: { value: testNumber, unit: "pc" },
+      qty: { value: testNumber, unit: "copies" },
+      rating: 72,
     },
   ],
 };

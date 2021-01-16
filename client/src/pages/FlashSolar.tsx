@@ -4,10 +4,9 @@ import { withPush } from "../utils/routingDecorators";
 import FlashLayout from "../layouts/Flash";
 import { TitleLogoBar } from "../layouts/Header";
 import { LoadingFullScreen } from "../components/Loading";
-import { Slideshow } from "../components/flash/Slideshow";
+import { SlideshowSolar } from "../components/flash/SlideshowSolar";
 import { FooterTicker } from "../components/flash/FooterTicker";
 import { Mode, User, StateDataMap } from "../logic/types";
-import { NEED_FOR_SPEED } from '../constants/nfsData';
 
 interface Props {
   user: User;
@@ -70,8 +69,8 @@ const Flash = ({
         <TitleLogoBar
           play={play}
           appId={appId}
-          title={`_FLASH`}
-          titleShort={`_FLASH`}
+          title={`_SOLAR_FLASH`}
+          titleShort={`_SOL_FLASH`}
           subtitle={``}
           backIcon={true}
         />
@@ -89,7 +88,7 @@ const Flash = ({
       }
     >
       {slidesData && (
-        <Slideshow
+        <SlideshowSolar
           init={init}
           play={play}
           setPlay={setPlay}

@@ -38,7 +38,7 @@ interface Props {
   data: SlidesStateData;
 }
 
-export const Slideshow = ({
+export const SlideshowSolar = ({
   init,
   play,
   setPlay,

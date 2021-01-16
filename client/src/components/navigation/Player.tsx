@@ -45,7 +45,7 @@ interface Props {
   setDuration: any;
   labels?: Array<string>;
   sequences: Array<string>;
-  bgIndex: number;
+  bgIndex?: number;
   setBgIndex: any;
 }
 

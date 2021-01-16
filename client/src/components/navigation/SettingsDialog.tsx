@@ -55,7 +55,7 @@ interface Props {
   handleSettingsClose: any;
   duration: number;
   setDuration: any;
-  bgIndex: number;
+  bgIndex?: number;
   setBgIndex: any;
 }
 
@@ -86,24 +86,25 @@ export const SettingsDialog = ({
 
       <DialogContent>
         {/* Background image */}
-        <DialogContentText>Change background</DialogContentText>
+        {bgIndex ? <>
+          <DialogContentText>Change background</DialogContentText>
 
-        <div className={classes.root}>
-          <GridList cellHeight={25} className={classes.gridList} cols={3}>
-            {imgArr.map((img, i) => (
-              <GridListTile key={i} cols={1}>
-                <Img
-                  onClick={() => setBgIndex(i)}
-                  src={img.min}
-                  alt={img.min}
-                  className={`${classes.img} ${
-                    i === bgIndex ? classes.selected : undefined
-                  }`}
-                />
-              </GridListTile>
-            ))}
-          </GridList>
-        </div>
+          <div className={classes.root}>
+            <GridList cellHeight={25} className={classes.gridList} cols={3}>
+              {imgArr.map((img, i) => (
+                <GridListTile key={i} cols={1}>
+                  <Img
+                    onClick={() => setBgIndex(i)}
+                    src={img.min}
+                    alt={img.min}
+                    className={`${classes.img} ${i === bgIndex ? classes.selected : undefined
+                      }`}
+                  />
+                </GridListTile>
+              ))}
+            </GridList>
+          </div>
+        </> : undefined}
 
         {/* Slide duration */}
         <PlayerInput

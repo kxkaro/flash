@@ -67,7 +67,7 @@ interface Props {
   appId: string;
   header?: any;
   footer?: any;
-  bgIndex: number;
+  bgIndex?: number;
   children?: Children;
 }
 
@@ -90,31 +90,33 @@ const Flash = ({
   }
   // Pick an image if appId matches any of the defined image lists, else undefined
   let img: Img | undefined;
-  Object.entries(images).forEach(([key, imgArr]) => {
-    if (key === appId) {
-      img = imgArr[bgIndex];
-    }
-  });
+  if (bgIndex) {
+    Object.entries(images).forEach(([key, imgArr]) => {
+      if (key === appId) {
+        img = imgArr[bgIndex];
+      }
+    });
+  }
 
   return (
     <ThemeWrapper mode={mode} appId={appId}>
       <Box className={classes.bg}>
         {/* Background: picture and after effects */}
-        {img && (
+        {img && bgIndex ? (
           <Box className={classes.screen}>
             <SuspenseImg
               alt={`background-${appId}`}
               img={{
-                img: img.png,
+                img: img?.png || "",
                 className: `${classes.bgImg} ${classes.blurOff}`,
               }}
               fallback={{
-                img: img.min,
+                img: img?.min || "",
                 className: `${classes.bgImg} ${classes.blur}`,
               }}
             />
           </Box>
-        )}
+        ) : undefined}
 
         {/* Header */}
         {header}

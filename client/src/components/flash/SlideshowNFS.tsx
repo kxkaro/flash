@@ -6,7 +6,7 @@ import { TitlePanels } from './TitlePanels';
 import { ImgTransition } from './ImgTransition';
 import { Transitions } from "./Transitions";
 import { FlashData } from "../../logic/dataTypes";
-import { TransitionVariant } from '../../logic/types';
+import { formatNumber } from '../../utils/numberFormat';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -29,7 +29,7 @@ interface Props {
     data: FlashData;
 }
 
-export const Slideshow2 = ({
+export const SlideshowNFS = ({
     play,
     setPlay,
     appId,
@@ -65,17 +65,31 @@ export const Slideshow2 = ({
 
     const backgrounds = data.games.map((slide, ind) => (
         <ImgTransition
+            play={play}
             sources={slide.background}
             duration={duration / slide.background.length}
             outerIndex={index}
         />
     ));
 
+    const unknownTx = [
+        "Who knows...",
+        "One will never know...",
+        "Wish I knew...",
+        "Probably more than you think...",
+        "Depends if you count pirated versions...",
+        "They told me to delete it...",
+        "Voices in my head tell me it's a lot..."
+    ];
     const ui = data.games.map((slide, ind) => (
         <TitlePanels
-            primary={slide.game.text}
-            secondary={slide.developers.join(", ")}
-            tertiary={slide.year}
+            primary={{ name: `#${ind + 1}`, body: slide.game.text }}
+            // TODO: add rating stars
+            secondary={{ name: "Year", body: slide.year }}
+            tertiary={{ name: "Sales", body: Number(slide.qty.value) > 0 ? 
+                `${formatNumber(slide.qty.value, 1, 0)} ${slide.qty.unit}` : 
+                unknownTx[Math.floor(Math.random() * unknownTx.length)] }}
+            quaternary={{ name: "Developers", body: slide.developers.join(", ")}}
         />
     ));
 
@@ -109,7 +123,6 @@ export const Slideshow2 = ({
                     setDuration={setDuration}
                     labels={labels}
                     sequences={sequences}
-                    bgIndex={0}
                     setBgIndex={() => ""}
                 />
             </Grid>

@@ -3,12 +3,12 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 // import Logout from "./pages/Logout";
 import Landing from "./pages/Landing";
-import Flash from "./pages/Flash";
-import Flash2 from "./pages/Flash2";
+import FlashSolar from "./pages/FlashSolar";
+import FlashNFS from "./pages/FlashNFS";
 import ScrollToTop from "./utils/ScrollToTop";
 import { INITIAL_STATE, PATHS } from "./constants/data";
 import { createStateData } from "./StateData";
-import { Mode, State, User } from "./logic/types";
+import { Mode, State } from "./logic/types";
 import { getRandom } from "./utils/numbers";
 import { NEED_FOR_SPEED } from './constants/nfsData';
 
@@ -65,7 +65,7 @@ class App extends Component<{}, State> {
                 be at the very end.
               */}
             <Route path={`/1/:id`}>
-              <Flash
+              <FlashSolar
                 mode={this.state.mode}
                 setMode={this.setMode}
                 data={this.state.data}
@@ -75,7 +75,7 @@ class App extends Component<{}, State> {
               />
             </Route>
             <Route path={`/2/:id`}>
-              <Flash2
+              <FlashNFS
                 mode={this.state.mode}
                 setMode={this.setMode}
                 data={NEED_FOR_SPEED}
