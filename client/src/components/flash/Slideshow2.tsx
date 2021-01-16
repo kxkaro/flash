@@ -79,7 +79,7 @@ export const Slideshow2 = ({
     data,
 }: Props) => {
     const classes = useStyles();
-    const [duration, setDuration] = useState(30000);
+    const [duration, setDuration] = useState(10000);
 
     // For the 'legend' in Player components (marks, sequences)
     const labels: Array<string> = data && data.games ? data?.games?.map(
@@ -132,7 +132,7 @@ export const Slideshow2 = ({
                 />
 
                 <Transitions
-                    variant="fade-in"
+                    variant="fade-in-slide-out"
                     components={ui}
                     index={index}
                 />

@@ -5,6 +5,7 @@ import { useSpring, useChain, config, animated, SpringHandle } from "react-sprin
 // import { Img } from 'react-image';
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { Box, Typography } from "@material-ui/core";
+import { Children } from '../../logic/types';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -170,29 +171,30 @@ export const TitlePanels = ({
 
     useChain([ref1, ref2, ref3, ref4], [.5, .8, 1.2, 1.8]);
 
+
     return (
         <Box className={classes.container}>
             <div style={{ transform: "skew(-15deg" }}>
-            {[primary, secondary, tertiary].map((tx, i) => (
-                <animated.div key={`anim-${i}`} style={styles[i]} className={clsx(classes.card)}>
+                {[primary, secondary, tertiary].map((tx, i) => (
+                    <animated.div key={`anim-${i}`} style={styles[i]} className={clsx(classes.card)}>
+                        <span className={clsx(classes.decor, classes.left)} />
+                        <span className={clsx(classes.decor, classes.right)} />
+                        <Typography variant="h6" color={i === 0 ? "primary" : "inherit"} className={classes.title}>
+                            {tx}
+                        </Typography>
+                    </animated.div>
+                ))}
+
+                <animated.div style={style4} className={clsx(classes.card)}>
                     <span className={clsx(classes.decor, classes.left)} />
                     <span className={clsx(classes.decor, classes.right)} />
-                    <Typography variant="h6" color={i === 0 ? "primary" : "inherit"} className={classes.title}>
-                        {tx}
-                    </Typography>
+                    <Typography variant="h6" color="primary" className={classes.title}>
+                        Sales
+                </Typography>
+                    <Typography variant="h6" color="inherit" className={classes.title}>
+                        1 M copies
+                </Typography>
                 </animated.div>
-            ))}
-
-            <animated.div style={style4} className={clsx(classes.card)}>
-                <span className={clsx(classes.decor, classes.left)} />
-                <span className={clsx(classes.decor, classes.right)} />
-                <Typography variant="h6" color="primary" className={classes.title}>
-                    Sales
-                </Typography>
-                <Typography variant="h6" color="inherit" className={classes.title}>
-                    1 M copies
-                </Typography>
-            </animated.div>
             </div>
         </Box>
     );

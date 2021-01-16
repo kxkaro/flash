@@ -30,24 +30,36 @@ export const Transitions = ({ variant = "fade-in", components, index, style, cla
   // if index is greater than the length of the slidesData array, show the last slide
   const ind = index < components.length ? index : components.length - 1;
 
-  const fadeIn = {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-    config: config.gentle,
-  };
 
-  const slideIn = {
-    from: { transform: "translateX(20rem)", width: "calc(100vw - 20rem)", opacity: 0 },
-    enter: { transform: "translateX(0rem)", opacity: 1 },
-    leave: { transform: "translateX(-20rem)", opacity: 0 },
-    config: config.stiff,
-  };
+
+  const transitionsDef = {
+    "fade-in": {
+      from: { opacity: 0 },
+      enter: { opacity: 1 },
+      leave: { opacity: 0 },
+      config: config.gentle,
+    },
+    "slide-in": {
+      from: { transform: "translateX(20rem)", width: "calc(100vw - 20rem)", opacity: 0 },
+      enter: { transform: "translateX(0rem)", opacity: 1 },
+      leave: { transform: "translateX(-20rem)", opacity: 0 },
+      config: config.stiff,
+    },
+    "fade-in-slide-out": {
+      from: { opacity: 0, transform: "translateX(0em)" },
+      enter: { opacity: 1, transform: "translateX(0em)" },
+      leave: { opacity: 0, transform: "translateX(-100vw)" },
+      config: config.stiff,
+    },
+  }
+
+  const transition = transitionsDef[variant];
+
 
   const transitions =  useTransition(
     components[ind],
     (item) => index % components.length,
-    variant === "slide-in" ? slideIn : fadeIn,
+    transition
   );
 
 
