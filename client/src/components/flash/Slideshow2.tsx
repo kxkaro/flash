@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Img } from 'react-image';
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
-import { Grid, Box, Typography } from "@material-ui/core";
+import { Grid, Box } from "@material-ui/core";
 import { Player } from "../navigation/Player";
 import { TitlePanels } from './TitlePanels';
 import { ImgTransition } from './ImgTransition';
@@ -14,27 +13,14 @@ const useStyles = makeStyles((theme: Theme) =>
         content: {
             position: "relative",
         },
-        bgContainer: {
+        cinema: {
             position: "fixed",
-            left: 0,
             top: 0,
-            right: 0,
-            bottom: 0,
-            zIndex: -5,
-            display: "flex",
-            justifyContent: "center",
+            height: "100vh",
+            width: "100%",
             '&::before': {
                 content: "''",
-                position: "absolute",
-                bottom: 0,
-                left: 0,
-                right: 0,
-                top: "auto",
-                height: "12.5vh",
-                backgroundColor: "black",
-            },
-            '&::after': {
-                content: "''",
+                zIndex: 1,
                 position: "absolute",
                 top: 0,
                 left: 0,
@@ -43,25 +29,18 @@ const useStyles = makeStyles((theme: Theme) =>
                 height: "12.5vh",
                 backgroundColor: "black",
             },
-        },
-        imgBg: {
-            zIndex: -2,
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "calc(100vh - 10em)",
-            margin: "5em auto",
-            objectFit: "cover",
-            filter: "blur(20px)",
-        },
-        img: {
-            zIndex: -1,
-            position: "absolute",
-            height: "calc(100vh - 10em)",
-            margin: "5em auto",
-            // filter: "drop-shadow(16px 16px 20px)",
-        },
+            '&::after': {
+                content: "''",
+                zIndex: 1,
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                top: "auto",
+                height: "12.5vh",
+                backgroundColor: "black",
+            },
+        }
     })
 );
 
@@ -79,7 +58,7 @@ export const Slideshow2 = ({
     data,
 }: Props) => {
     const classes = useStyles();
-    const [duration, setDuration] = useState(10000);
+    const [duration, setDuration] = useState(30000);
 
     // For the 'legend' in Player components (marks, sequences)
     const labels: Array<string> = data && data.games ? data?.games?.map(
@@ -107,8 +86,8 @@ export const Slideshow2 = ({
 
 
     const backgrounds = data.games.map((slide, ind) => (
-        <ImgTransition 
-            sources={slide.background} 
+        <ImgTransition
+            sources={slide.background}
             duration={duration / slide.background.length}
             outerIndex={index}
         />
@@ -125,11 +104,14 @@ export const Slideshow2 = ({
     return (
         <Grid container justify="center">
             <Grid container item className={classes.content}>
-                <Transitions
-                    variant="fade-in"
-                    components={backgrounds}
-                    index={index}
-                />
+
+                <Box className={classes.cinema}>
+                    <Transitions
+                        variant="swipe-cube-horizontal"
+                        components={backgrounds}
+                        index={index}
+                    />
+                </Box>
 
                 <Transitions
                     variant="fade-in-slide-out"
