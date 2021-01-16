@@ -87,7 +87,7 @@ export const SlideshowNFS = ({
             // TODO: add rating stars
             secondary={{ name: "Year", body: slide.year }}
             tertiary={{ name: "Sales", body: Number(slide.qty.value) > 0 ? 
-                `${formatNumber(slide.qty.value, 1, 0)} ${slide.qty.unit}` : 
+                `${formatNumber(slide.qty.value, 1000000, 1)} M ${slide.qty.unit}` : 
                 unknownTx[Math.floor(Math.random() * unknownTx.length)] }}
             quaternary={{ name: "Developers", body: slide.developers.join(", ")}}
         />
