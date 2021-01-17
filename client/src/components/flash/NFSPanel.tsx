@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
             border: "solid 1px white",
             position: "relative",
             color: "white",
+            padding: "1em",
         },
         decor: {
             '&$left': {
@@ -112,9 +113,6 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         left: {},
         right: {},
-        skew: {
-            transform: "skew(-15deg)",
-        }
     })
 );
 
@@ -128,7 +126,7 @@ export const NFSPanel = ({ skew = false, style, children }: Props) => {
     const classes = useStyles();
 
     return (
-        <animated.div style={style} className={clsx(classes.card, { [classes.skew]: skew })}>
+        <animated.div style={style} className={classes.card}>
 
             <span className={clsx(classes.decor, classes.left)} />
             <span className={clsx(classes.decor, classes.right)} />

@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
             position: "relative",
             overflow: "hidden",
             '& > div > div:nth-child(-n+3)': {
-                padding: ".8em 2rem .8em calc(8vw + 2rem)",
+                padding: "1.5vh 2vh 1.5vh calc(8vw + 2vh)",
                 marginLeft: "-5vw",
             },
             '& > div > div:nth-child(1)': {
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
                 height: "12vh",
             },
             '& > div > div:nth-child(4)': {
-                padding: ".8em 2rem",
+                padding: "1.5vh 4vh",
                 marginTop: "16vh",
                 [theme.breakpoints.down("md")]: {
                     marginTop: "10vh",

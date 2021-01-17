@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles, Theme, createStyles, withStyles } from "@material-ui/core/styles";
-import { Grid, Box } from "@material-ui/core";
+import { Grid, Box, Hidden } from "@material-ui/core";
 import { Player } from "../navigation/Player";
 import { TitlePanels } from './TitlePanels';
 import { ImgTransition } from './ImgTransition';
@@ -9,6 +9,7 @@ import { FlashData } from "../../logic/dataTypes";
 import { formatNumber } from '../../utils/numberFormat';
 import { Rating } from "@material-ui/lab";
 import { Tooltip } from "@material-ui/core";
+import { SmallScreenMessage } from './SmallScreenMessage';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -90,23 +91,23 @@ export const SlideshowNFS = ({
 
     const StyledRating = withStyles((theme: Theme) => ({
         iconFilled: {
-          color: theme.palette.primary.main,
+            color: theme.palette.primary.main,
         },
         iconHover: {
-          color: theme.palette.primary.main,
+            color: theme.palette.primary.main,
         },
         iconEmpty: {
             color: theme.palette.primary.main,
             opacity: .4,
         }
-      }))(Rating);
+    }))(Rating);
 
     const rating = (n: number) =>
-        <Box style={{ marginTop: ".4vh"}} component="fieldset" mb={3} borderColor="transparent">
+        <Box style={{ marginTop: ".4vh" }} component="fieldset" mb={3} borderColor="transparent">
             <Tooltip title="Metacritic Rating" arrow interactive>
-                <StyledRating 
-                    name="metacritic-rating-10" 
-                    defaultValue={n / 10} max={10} 
+                <StyledRating
+                    name="metacritic-rating-10"
+                    defaultValue={n / 10} max={10}
                     precision={0.1}
                     readOnly
                 />
@@ -126,42 +127,50 @@ export const SlideshowNFS = ({
             quaternary={{ name: "Developers", body: slide.developers.join(", ") }}
         />
     ));
-console.log(index, prevIndex, totalLen)
+    console.log(index, prevIndex, totalLen)
     return (
         <Grid container justify="center">
             <Grid container item className={classes.content}>
+                <Hidden only="xs">
+                    <Box className={classes.cinema}>
+                        <Transitions
+                            variant={(index < prevIndex || (prevIndex === 0 && index === (totalLen - 1))) ? "swipe-cube-to-right" : "swipe-cube-to-left"}
+                            components={backgrounds}
+                            index={index}
+                        />
+                    </Box>
 
-                <Box className={classes.cinema}>
                     <Transitions
-                        variant={(index < prevIndex || (prevIndex === 0 && index === (totalLen-1))) ? "swipe-cube-to-right" : "swipe-cube-to-left"}
-                        components={backgrounds}
+                        variant="fade-in-slide-out"
+                        components={ui}
                         index={index}
                     />
-                </Box>
 
-                <Transitions
-                    variant="fade-in-slide-out"
-                    components={ui}
-                    index={index}
-                />
+                    <Player
+                        appId={appId}
+                        init={true}
+                        play={play}
+                        setPlay={setPlay}
+                        index={index}
+                        length={totalLen}
+                        setIndex={(n: number, prev: number) => {
+                            setIndex(n);
+                            setPrevIndex(prev);
+                        }}
+                        duration={duration}
+                        setDuration={setDuration}
+                        labels={labels}
+                        sequences={sequences}
+                        setBgIndex={() => ""}
+                    />
+                </Hidden>
 
-                <Player
-                    appId={appId}
-                    init={true}
-                    play={play}
-                    setPlay={setPlay}
-                    index={index}
-                    length={totalLen}
-                    setIndex={(n: number, prev: number) => {
-                        setIndex(n);
-                        setPrevIndex(prev);
-                    }}
-                    duration={duration}
-                    setDuration={setDuration}
-                    labels={labels}
-                    sequences={sequences}
-                    setBgIndex={() => ""}
-                />
+                <Hidden smUp>
+                    <SmallScreenMessage 
+                        header="Ooops..." 
+                        message="Looks like your screen is too small... This app is designed for large screens, try switching to horizontal view or launch it on your desktop." 
+                    />
+                </Hidden>
             </Grid>
         </Grid>
     );
