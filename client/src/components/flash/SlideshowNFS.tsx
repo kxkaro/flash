@@ -166,10 +166,7 @@ export const SlideshowNFS = ({
                 </Hidden>
 
                 <Hidden smUp>
-                    <SmallScreenMessage 
-                        header="Ooops..." 
-                        message="Looks like your screen is too small... This app is designed for large screens, try switching to horizontal view or launch it on your desktop." 
-                    />
+                    <SmallScreenMessage variant="NFS" />
                 </Hidden>
             </Grid>
         </Grid>
