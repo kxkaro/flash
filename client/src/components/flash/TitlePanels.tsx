@@ -30,103 +30,26 @@ const useStyles = makeStyles((theme: Theme) =>
             '& > div > div:nth-child(4)': {
                 padding: ".8em 2rem",
                 marginTop: "16vh",
+                [theme.breakpoints.down("md")]: {
+                    marginTop: "10vh",
+                },
                 position: "absolute",
                 right: "-10vw",
                 height: "12vh",
-                // animationDelay: "1.8s",
             },
         },
-        card: {
-            backgroundColor: "rgba(0, 0, 0, .6)",
-            width: "30%",
-            margin: ".5em",
-            border: "solid 1px white",
-            // transform: "skew(-15deg) translateX(10rem)",
-            position: "relative",
-            color: "white",
-            // opacity: 0,
-            // animation: `$no-transform-skew 2s cubic-bezier(0, 1, 0, .95) forwards`,
+        skew: {
+            transform: "skew(-15deg)",
         },
-        decor: {
-            '&$left': {
-                left: "calc(0px - 16px - 10px)",
-                position: "absolute",
-                top: "-1px",
-                bottom: "-1px",
-                right: "auto",
-                width: "16px",
-                backgroundColor: "rgba(0, 0, 0, .4)",
-                border: "solid 1px white",
-                opacity: .8,
-                '&::before': {
-                    content: "''",
-                    left: "calc(0px - 13px - 10px)",
-                    position: "absolute",
-                    top: "-1px",
-                    bottom: "-1px",
-                    right: "auto",
-                    width: "12px",
-                    backgroundColor: "rgba(0, 0, 0, .4)",
-                    border: "solid 1px white",
-                    opacity: .6,
-                },
-                '&::after': {
-                    content: "''",
-                    left: "calc(0px - 19px - 22px)",
-                    position: "absolute",
-                    top: "-1px",
-                    bottom: "-1px",
-                    right: "auto",
-                    width: "6px",
-                    backgroundColor: "rgba(0, 0, 0, .4)",
-                    border: "solid 1px white",
-                    opacity: .4,
-                },
-            },
-            '&$right': {
-                left: "calc(100% + 10px)",
-                position: "absolute",
-                top: "-1px",
-                bottom: "-1px",
-                right: "auto",
-                width: "16px",
-                backgroundColor: "rgba(0, 0, 0, .4)",
-                border: "solid 1px white",
-                opacity: .8,
-                '&::before': {
-                    content: "''",
-                    left: "calc(100% + 10px)",
-                    position: "absolute",
-                    top: "-1px",
-                    bottom: "-1px",
-                    right: "auto",
-                    width: "12px",
-                    backgroundColor: "rgba(0, 0, 0, .4)",
-                    border: "solid 1px white",
-                    opacity: .6,
-                },
-                '&::after': {
-                    content: "''",
-                    left: "calc(100% + 11px + 22px)",
-                    position: "absolute",
-                    top: "-1px",
-                    bottom: "-1px",
-                    right: "auto",
-                    width: "6px",
-                    backgroundColor: "rgba(0, 0, 0, .4)",
-                    border: "solid 1px white",
-                    opacity: .4,
-                },
-            },
-        },
-        left: {},
-        right: {},
         title: {
             fontWeight: "bold",
         },
         text: {
-            fontSize: "2vh",
             textTransform: "uppercase",
+            fontSize: "2vh",
+            [theme.breakpoints.down("md")]: {
+                fontSize: "1.6vh",
+            },
         },
         ...animations
     })
@@ -187,7 +110,7 @@ export const TitlePanels = ({
 
     return (
         <Box className={classes.container}>
-            <div style={{ transform: "skew(-15deg" }}>
+            <div className={classes.skew}>
                 {[primary, secondary, tertiary, quaternary].map(({ name, body }, i) => (
                     <NFSPanel key={`anim-${i}`} style={styles[i]}>
                         <Typography color="primary" className={clsx(classes.text, classes.title)}>
