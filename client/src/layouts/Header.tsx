@@ -31,15 +31,18 @@ const useStyles = makeStyles((theme: Theme) =>
       textTransform: "uppercase",
     },
     title: {
-      fontSize: theme.fontSizes.primary,
+      // fontSize: "2em",
       zIndex: 10,
       marginTop: "1vh",
-      [theme.breakpoints.down("sm")]: {
-        fontSize: theme.fontSizes.secondary,
-      },
+      // [theme.breakpoints.down("sm")]: {
+      //   fontSize: "1.2em",
+      // },
     },
     subtitle: {
-      fontSize: theme.fontSizes.quinary,
+      // fontSize: "1.2em",
+      // [theme.breakpoints.down("sm")]: {
+      //   fontSize: ".6em",
+      // },
     },
     logoContainer: {
       position: "fixed",
@@ -177,26 +180,26 @@ export const TitleLogoBar = ({
             </Tooltip>
           </Link>
         )}
-        <Hidden only="xs">
-          <Typography color="inherit" className={classes.title}>
+        <Hidden smDown>
+          <Typography variant="h4" color="inherit" className={classes.title}>
             {title}
           </Typography>
         </Hidden>
-        <Hidden smUp>
-          <Typography color="inherit" className={classes.title}>
+        <Hidden mdUp>
+          <Typography variant="h6" color="inherit" className={classes.title}>
             {titleShort}
           </Typography>
         </Hidden>
       </Grid>
 
       <Grid item xs={12}>
-        <Hidden only="xs">
+        <Hidden smDown>
           <Typography color="inherit" variant="h6" className={classes.subtitle}>
             {subtitle}
           </Typography>
         </Hidden>
-        <Hidden smUp>
-          <Typography color="inherit" variant="h6" className={classes.subtitle}>
+        <Hidden mdUp>
+          <Typography color="inherit" variant="body1" className={classes.subtitle}>
             {subtitleShort}
           </Typography>
         </Hidden>
