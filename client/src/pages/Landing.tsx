@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
       overflowX: "hidden",
       textAlign: "center",
       overflowY: "scroll",
+      padding: "0 5vw",
       "&::-webkit-scrollbar": {
         width: ".6em",
       },
@@ -51,8 +52,8 @@ const useStyles = makeStyles((theme: Theme) =>
     imgContainer: {
       position: "relative",
       overflow: "hidden",
-      width: "80%",
-      height: "80%",
+      width: "40vw",
+      height: "50vh",
       [theme.breakpoints.down("sm")]: {
         width: "60%",
         height: "60%",
@@ -150,7 +151,7 @@ const Landing = ({ user, mode, setMode }: Props) => {
         className={classes.container}
       >
         {Object.entries(items).map(([key, item], i) => (
-          <Grid item xs={12} sm={6} container justify="center" alignItems="center" className={classes.item}>
+          <Grid item xs={12} md={6} container justify="center" alignItems="center" className={classes.item}>
             <Link key={i} to={`/${i + 1}/${key}`}>
               <div className={classes.imgContainer}>
                 <SuspenseImg

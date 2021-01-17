@@ -31,18 +31,18 @@ const useStyles = makeStyles((theme: Theme) =>
       textTransform: "uppercase",
     },
     title: {
-      // fontSize: "2em",
+      fontSize: "2em",
       zIndex: 10,
       marginTop: "1vh",
-      // [theme.breakpoints.down("sm")]: {
-      //   fontSize: "1.2em",
-      // },
+      [theme.breakpoints.down("sm")]: {
+        fontSize: "1.2em",
+      },
     },
     subtitle: {
-      // fontSize: "1.2em",
-      // [theme.breakpoints.down("sm")]: {
-      //   fontSize: ".6em",
-      // },
+      fontSize: "1.2em",
+      [theme.breakpoints.down("sm")]: {
+        fontSize: ".6em",
+      },
     },
     logoContainer: {
       position: "fixed",
@@ -170,7 +170,7 @@ export const TitleLogoBar = ({
       alignItems="flex-start"
       className={classes.topBar}
     >
-      <Grid item container xs={12} sm={8}>
+      <Grid item container alignItems="center" xs={12} sm={8}>
         {backIcon && (
           <Link to="/">
             <Tooltip title="Back to main screen" arrow>
@@ -181,12 +181,12 @@ export const TitleLogoBar = ({
           </Link>
         )}
         <Hidden smDown>
-          <Typography variant="h4" color="inherit" className={classes.title}>
+          <Typography color="inherit" className={classes.title}>
             {title}
           </Typography>
         </Hidden>
         <Hidden mdUp>
-          <Typography variant="h6" color="inherit" className={classes.title}>
+          <Typography color="inherit" className={classes.title}>
             {titleShort}
           </Typography>
         </Hidden>
@@ -194,12 +194,12 @@ export const TitleLogoBar = ({
 
       <Grid item xs={12}>
         <Hidden smDown>
-          <Typography color="inherit" variant="h6" className={classes.subtitle}>
+          <Typography color="inherit" className={classes.subtitle}>
             {subtitle}
           </Typography>
         </Hidden>
         <Hidden mdUp>
-          <Typography color="inherit" variant="body1" className={classes.subtitle}>
+          <Typography color="inherit" className={classes.subtitle}>
             {subtitleShort}
           </Typography>
         </Hidden>
