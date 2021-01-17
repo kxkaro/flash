@@ -1,10 +1,8 @@
 import React from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { Box, IconButton, Tooltip } from "@material-ui/core";
-import LaunchIcon from "@material-ui/icons/Launch";
-// import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import SettingsIcon from "@material-ui/icons/Settings";
-// import { PinIconFilled, PinIconOutlined } from '../icons/PinIcon';
+import { PinIconOutlined, PinIconFilled } from '../../icons/PinIcon';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -15,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     pinIcon: {
-      transform: "rotate(180deg)",
+      transform: "rotate(45deg)",
       "&$active": {
         color: theme.palette.secondary.main,
       },
@@ -37,6 +35,8 @@ export const PlayerSettingsButton = ({
 }: Props) => {
   const classes = useStyles();
 
+  const PinIcon = pin ? PinIconOutlined : PinIconFilled;
+
   return (
     <Box>
       {/* Pin to window */}
@@ -45,7 +45,7 @@ export const PlayerSettingsButton = ({
           onClick={() => setPin((prev: boolean) => setPin(!prev))}
           className={classes.icon}
         >
-          <LaunchIcon
+          <PinIcon
             className={`${classes.pinIcon} ${pin ? classes.active : undefined}`}
           />
         </IconButton>

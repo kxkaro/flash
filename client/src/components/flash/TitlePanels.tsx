@@ -1,9 +1,10 @@
 import React, { useRef, RefObject } from "react";
 import { animations } from '../../styles/animations';
 import clsx from 'clsx';
-import { useSpring, useChain, config, animated, SpringHandle } from "react-spring";
+import { useSpring, useChain, config, SpringHandle } from "react-spring";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { Box, Typography } from "@material-ui/core";
+import { NFSPanel } from './NFSPanel';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -13,20 +14,20 @@ const useStyles = makeStyles((theme: Theme) =>
             width: "100vw",
             position: "relative",
             overflow: "hidden",
-            '& $card:nth-child(-n+3)': {
+            '& > div > div:nth-child(-n+3)': {
                 padding: ".8em 2rem .8em calc(8vw + 2rem)",
                 marginLeft: "-5vw",
             },
-            '& $card:nth-child(1)': {
+            '& > div > div:nth-child(1)': {
                 height: "15vh",
             },
-            '& $card:nth-child(2)': {
+            '& > div > div:nth-child(2)': {
                 height: "12vh",
             },
-            '& $card:nth-child(3)': {
+            '& > div > div:nth-child(3)': {
                 height: "12vh",
             },
-            '& $card:nth-child(4)': {
+            '& > div > div:nth-child(4)': {
                 padding: ".8em 2rem",
                 marginTop: "16vh",
                 position: "absolute",
@@ -41,77 +42,77 @@ const useStyles = makeStyles((theme: Theme) =>
             margin: ".5em",
             border: "solid 1px white",
             // transform: "skew(-15deg) translateX(10rem)",
-            // position: "relative",
+            position: "relative",
             color: "white",
             // opacity: 0,
             // animation: `$no-transform-skew 2s cubic-bezier(0, 1, 0, .95) forwards`,
         },
         decor: {
             '&$left': {
-                left: "calc(0% - 1.3rem - 5px)",
+                left: "calc(0px - 16px - 10px)",
                 position: "absolute",
                 top: "-1px",
                 bottom: "-1px",
                 right: "auto",
-                width: "1.2rem",
+                width: "16px",
                 backgroundColor: "rgba(0, 0, 0, .4)",
                 border: "solid 1px white",
                 opacity: .8,
                 '&::before': {
                     content: "''",
-                    left: "calc(0% - 1rem - 6px)",
+                    left: "calc(0px - 13px - 10px)",
                     position: "absolute",
                     top: "-1px",
                     bottom: "-1px",
                     right: "auto",
-                    width: ".9rem",
+                    width: "12px",
                     backgroundColor: "rgba(0, 0, 0, .4)",
                     border: "solid 1px white",
                     opacity: .6,
                 },
                 '&::after': {
                     content: "''",
-                    left: "calc(0% - 1.6rem - 14px)",
+                    left: "calc(0px - 19px - 22px)",
                     position: "absolute",
                     top: "-1px",
                     bottom: "-1px",
                     right: "auto",
-                    width: ".4rem",
+                    width: "6px",
                     backgroundColor: "rgba(0, 0, 0, .4)",
                     border: "solid 1px white",
                     opacity: .4,
                 },
             },
             '&$right': {
-                left: "calc(100% + 8px)",
+                left: "calc(100% + 10px)",
                 position: "absolute",
                 top: "-1px",
                 bottom: "-1px",
                 right: "auto",
-                width: "1.2rem",
+                width: "16px",
                 backgroundColor: "rgba(0, 0, 0, .4)",
                 border: "solid 1px white",
                 opacity: .8,
                 '&::before': {
                     content: "''",
-                    left: "calc(100% + 6px)",
+                    left: "calc(100% + 10px)",
                     position: "absolute",
                     top: "-1px",
                     bottom: "-1px",
                     right: "auto",
-                    width: ".9rem",
+                    width: "12px",
                     backgroundColor: "rgba(0, 0, 0, .4)",
                     border: "solid 1px white",
                     opacity: .6,
                 },
                 '&::after': {
                     content: "''",
-                    left: "calc(100% + .9rem + 14px)",
+                    left: "calc(100% + 11px + 22px)",
                     position: "absolute",
                     top: "-1px",
                     bottom: "-1px",
                     right: "auto",
-                    width: ".4rem",
+                    width: "6px",
                     backgroundColor: "rgba(0, 0, 0, .4)",
                     border: "solid 1px white",
                     opacity: .4,
@@ -188,12 +189,7 @@ export const TitlePanels = ({
         <Box className={classes.container}>
             <div style={{ transform: "skew(-15deg" }}>
                 {[primary, secondary, tertiary, quaternary].map(({ name, body }, i) => (
-
-                    <animated.div key={`anim-${i}`} style={styles[i]} className={clsx(classes.card)}>
-
-                        <span className={clsx(classes.decor, classes.left)} />
-                        <span className={clsx(classes.decor, classes.right)} />
-
+                    <NFSPanel key={`anim-${i}`} style={styles[i]}>
                         <Typography color="primary" className={clsx(classes.text, classes.title)}>
                             {name}
                         </Typography>
@@ -202,7 +198,7 @@ export const TitlePanels = ({
                         </Typography>
                         
                         {i === 0 && primaryContent}
-                    </animated.div>
+                    </NFSPanel>
                 ))}
             </div>
         </Box>
