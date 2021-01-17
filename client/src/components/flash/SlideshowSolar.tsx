@@ -6,6 +6,7 @@ import { NavTitles } from "./NavTitles";
 import { Content } from "./Content";
 import BarChart from "../dataviz/HTMLCharts/BarChart";
 import ImgTiles from "./ImgTiles";
+import { SmallScreenMessage } from './SmallScreenMessage';
 import { SlidesStateData, SlideData } from "../../logic/types";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -133,58 +134,67 @@ export const SlideshowSolar = ({
   return (
     <Grid container justify="center">
       <Grid container item className={classes.content}>
-        <NavTitles
-          init={init}
-          current={slides[index].headers}
-          next={slides[(index + 1) % totalLen].headers}
-          play={play}
-          index={index}
-          setIndex={setIndex}
-          seqLen={seqLen}
-          onBreadClick={(index: number) =>
-            setIndex(
-              (prev: number) => index + Math.floor(prev / seqLen) * seqLen // TODO: repair this to take into consideration current sequence name
-            )
-          }
-          sequences={sequences}
-          currentSequence={slides[index].headers.sequence}
-        />
+        <Hidden only="xs">
+          <NavTitles
+            init={init}
+            current={slides[index].headers}
+            next={slides[(index + 1) % totalLen].headers}
+            play={play}
+            index={index}
+            setIndex={setIndex}
+            seqLen={seqLen}
+            onBreadClick={(index: number) =>
+              setIndex(
+                (prev: number) => index + Math.floor(prev / seqLen) * seqLen // TODO: repair this to take into consideration current sequence name
+              )
+            }
+            sequences={sequences}
+            currentSequence={slides[index].headers.sequence}
+          />
 
-        {[...slides[index].data.entries()].map(([name, value], i) => (
-          // TODO: Responsiveness:
-          <Hidden
-            key={`${name}-${i}`}
-            only={i > 0 ? "xs" : undefined}
-            smDown={i > 1}
-          >
-            <Content
-              init={init}
-              name={name}
-              tileData={value.tile} // TODO: consider changing to Transitions and passing components
-              components={getComponents(name)}
-              index={index}
-            />
-          </Hidden>
-        ))}
+          {[...slides[index].data.entries()].map(([name, value], i) => (
+            // TODO: Responsiveness:
+            <Hidden
+              key={`${name}-${i}`}
+              only={i > 0 ? "xs" : undefined}
+              // smDown={i > 1}
+            >
+              <Content
+                init={init}
+                name={name}
+                tileData={value.tile} // TODO: consider changing to Transitions and passing components
+                components={getComponents(name)}
+                index={index}
+              />
+            </Hidden>
+          ))}
 
-        <Player
-          appId={appId}
-          init={init}
-          play={play}
-          setPlay={setPlay}
-          index={index}
-          length={totalLen}
-          setIndex={(n: number, prev: number) => {
-            setIndex(n);
-            setPrevIndex(prev);
-          }}
-          duration={duration}
-          setDuration={setDuration}
-          labels={labels}
-          sequences={sequences}
-          bgIndex={bgIndex}
-          setBgIndex={setBgIndex}
-        />
+          <Player
+            appId={appId}
+            init={init}
+            play={play}
+            setPlay={setPlay}
+            index={index}
+            length={totalLen}
+            setIndex={(n: number, prev: number) => {
+              setIndex(n);
+              setPrevIndex(prev);
+            }}
+            duration={duration}
+            setDuration={setDuration}
+            labels={labels}
+            sequences={sequences}
+            bgIndex={bgIndex}
+            setBgIndex={setBgIndex}
+          />
+        </Hidden>
+
+        <Hidden smUp>
+          <SmallScreenMessage
+            header="Ooops..."
+            message="Looks like your screen is too small... This app is designed for large screens, try switching to horizontal view or launch it on your desktop."
+          />
+        </Hidden>
       </Grid>
     </Grid>
   );

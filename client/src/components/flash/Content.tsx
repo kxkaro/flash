@@ -53,7 +53,7 @@ export const Content = ({
   const classes = useStyles();
 
   return (
-    <Grid container item xs={12} sm={6} md={4}>
+    <Grid container item xs={12} sm={4}>
       <Box
         className={`${classes.card} ${classes.tiles} ${
           init ? classes.pauseAnim : undefined
