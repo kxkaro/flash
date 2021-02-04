@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
       - image: kxkaro/flash-client
-        imagePullPolicy: ""
+        imagePullPolicy: "Always"
         name: flash-web
         ports:
         - containerPort: 80

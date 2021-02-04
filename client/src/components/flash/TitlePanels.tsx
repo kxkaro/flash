@@ -46,9 +46,9 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         text: {
             textTransform: "uppercase",
-            fontSize: "2vh",
+            fontSize: "2.2vh",
             [theme.breakpoints.down("md")]: {
-                fontSize: "1.6vh",
+                fontSize: "2vh",
             },
         },
         ...animations

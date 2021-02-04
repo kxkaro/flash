@@ -83,7 +83,7 @@ export const Player = ({
     if (show === true) {
       const timeout = setTimeout(() => {
         setShow(false);
-      }, 1000);
+      }, 3000);
 
       // Clean up hook
       return () => {

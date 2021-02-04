@@ -134,7 +134,7 @@ export const SlideshowSolar = ({
   return (
     <Grid container justify="center">
       <Grid container item className={classes.content}>
-        <Hidden only="xs">
+        <Hidden smDown>
           <NavTitles
             init={init}
             current={slides[index].headers}
@@ -189,7 +189,7 @@ export const SlideshowSolar = ({
           />
         </Hidden>
 
-        <Hidden smUp>
+        <Hidden mdUp>
           <SmallScreenMessage variant="Solar" init={init} />
         </Hidden>
       </Grid>
