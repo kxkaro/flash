@@ -115,15 +115,15 @@ const Landing = ({ user, mode, setMode }: Props) => {
     },
   };
 
-  const captions = [
-    "Data collected manually",
-    "Solar System:",
-    "- https://nssdc.gsfc.nasa.gov/planetary/factsheet/",
-    "Need For Speed:",
-    "- https://vgsales.fandom.com/wiki/Need_for_Speed",
-    "- https://en.wikipedia.org/wiki/Need_for_Speed)",
-    "Contact me via kxkaro@gmail.com",
-  ];
+  // const captions = [
+  //   "Data collected manually",
+  //   "Solar System:",
+  //   "- https://nssdc.gsfc.nasa.gov/planetary/factsheet/",
+  //   "Need For Speed:",
+  //   "- https://vgsales.fandom.com/wiki/Need_for_Speed",
+  //   "- https://en.wikipedia.org/wiki/Need_for_Speed)",
+  //   "Contact me via kxkaro@gmail.com",
+  // ];
 
   return (
     <FlashLayout

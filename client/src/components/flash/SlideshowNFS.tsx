@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 import {
   makeStyles,
   Theme,
@@ -169,7 +169,7 @@ export const SlideshowNFS = ({ play, setPlay, appId, data }: Props) => {
   const slides = data.games
     .map((slide, ind) =>
       slide.background.map((src, i) => (
-        <div className={classes.container}>
+        <div key={i} className={classes.container}>
           <Img src={src} key={`${src}-${i}-bg`} className={classes.imgBg} />
           <Img src={src} key={`${src}-${i}`} className={classes.img} />
         </div>
@@ -229,6 +229,7 @@ export const SlideshowNFS = ({ play, setPlay, appId, data }: Props) => {
 
       return slide.background.map(() => (
         <TitlePanels
+          key={ind}
           primary={{ name: `#${ind + 1}`, body: slide.game.text }}
           primaryContent={slide?.rating ? rating(slide.rating) : undefined}
           secondary={{ name: "Year", body: slide.year }}
@@ -237,7 +238,7 @@ export const SlideshowNFS = ({ play, setPlay, appId, data }: Props) => {
             body: salesAmount,
           }}
           quaternary={{ name: "Developers", body: slide.developers.join(", ") }}
-          applyStyle={index % imgPerSlide === 0}
+          applyStyle={!((index > prevIndex && index % imgPerSlide !== 0) || (index < prevIndex && Math.floor(index / imgPerSlide) === Math.floor(prevIndex / imgPerSlide)))}
         />
       ));
     })
@@ -250,10 +251,9 @@ export const SlideshowNFS = ({ play, setPlay, appId, data }: Props) => {
           <Box className={classes.cinema}>
             <Transitions
               variant={
-                index % imgPerSlide !== 0
+                (index > prevIndex && index % imgPerSlide !== 0) || (index < prevIndex && Math.floor(index / imgPerSlide) === Math.floor(prevIndex / imgPerSlide))
                   ? "fade-in"
-                  : index % imgPerSlide === 0 &&
-                    (index < prevIndex ||
+                  : (index < prevIndex ||
                       (prevIndex === 0 && index === (totalLen * imgPerSlide) - 1))
                   ? "swipe-cube-to-right"
                   : "swipe-cube-to-left"
@@ -279,7 +279,7 @@ export const SlideshowNFS = ({ play, setPlay, appId, data }: Props) => {
             length={totalLen}
             setIndex={(n: number, prev: number) => {
               setIndex(n * imgPerSlide);
-              setPrevIndex(prev);
+              setPrevIndex(prev * imgPerSlide);
             }}
             setSecondaryIndex={(n: number, prev: number) => {
               setIndex(n);

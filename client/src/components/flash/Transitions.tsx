@@ -34,7 +34,8 @@ export const Transitions = ({ variant = "fade-in", components, index, style, cla
 
   const transitionsDef = {
     "none": {
-      
+      from: { opacity: 1 },
+      to: { opacity: 1 },
     },
     "fade-in": {
       from: { opacity: 0 },

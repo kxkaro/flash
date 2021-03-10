@@ -102,7 +102,7 @@ export const PlayerButtons = ({
           </IconButton>
         </Tooltip>
 
-        {setSecondaryIndex && secondaryIndex != undefined ? <Tooltip title={`Previous ${categorySecondary}`} aria-label={`previous ${categorySecondary}`} arrow>
+        {setSecondaryIndex && secondaryIndex !== undefined ? <Tooltip title={`Previous ${categorySecondary}`} aria-label={`previous ${categorySecondary}`} arrow>
           <IconButton
             color="inherit"
             aria-label={`previous ${categorySecondary} icon`}
@@ -125,7 +125,7 @@ export const PlayerButtons = ({
           </Typography>
         </Tooltip>
 
-        {setSecondaryIndex && secondaryIndex != undefined ? <Tooltip title={`Next ${categorySecondary}`} aria-label={`next ${categorySecondary}`} arrow>
+        {setSecondaryIndex && secondaryIndex !== undefined ? <Tooltip title={`Next ${categorySecondary}`} aria-label={`next ${categorySecondary}`} arrow>
           <IconButton
             color="inherit"
             aria-label={`next ${categorySecondary} icon`}
