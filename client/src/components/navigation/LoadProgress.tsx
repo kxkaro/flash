@@ -5,8 +5,10 @@ import { Typography } from "@material-ui/core";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
-      zIndex: 200,
       color: "rgba(255, 255, 255, .87)",
+      position: "fixed",
+      top: 0,
+      left: 0,
       width: "100%",
       height: "100vh",
       display: "flex",

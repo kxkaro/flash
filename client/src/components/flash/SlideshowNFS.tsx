@@ -5,6 +5,7 @@ import {
   createStyles,
   withStyles,
 } from "@material-ui/core/styles";
+import { Img } from "react-image";
 import { Grid, Box, Hidden } from "@material-ui/core";
 import { Player } from "../navigation/Player";
 import { TitlePanels } from "./TitlePanels";
@@ -14,7 +15,7 @@ import { FlashData } from "../../logic/dataTypes";
 import { formatNumber } from "../../utils/numberFormat";
 import { Rating } from "@material-ui/lab";
 import { Tooltip } from "@material-ui/core";
-import { LoadProgress } from '../navigation/LoadProgress';
+import { LoadProgress } from "../navigation/LoadProgress";
 import { SmallScreenMessage } from "./SmallScreenMessage";
 import { NEED_FOR_SPEED } from "../../constants/nfsData";
 
@@ -28,6 +29,54 @@ const useStyles = makeStyles((theme: Theme) =>
       top: 0,
       height: "100vh",
       width: "100%",
+    },
+    container: {
+        position: "relative",
+        top: 0,
+        height: "100vh",
+        width: "100%",
+        display: "flex",
+        justifyContent: "center", 
+        alignItems: "center",
+        '&::before': {
+            content: "''",
+            position: "absolute",
+            top: 0,
+            left: "-20%",
+            right: "-20%",
+            bottom: "auto",
+            height: "12.5vh",
+            backgroundColor: "black",
+        },
+        '&::after': {
+            content: "''",
+            position: "absolute",
+            bottom: 0,
+            left: "-20%",
+            right: "-20%",
+            top: "auto",
+            height: "12.5vh",
+            backgroundColor: "black",
+        },
+    },
+    imgBg: {
+      zIndex: -2,
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "calc(100vh - 10em)",
+      margin: "5em auto",
+      objectFit: "cover",
+      filter: "blur(20px)",
+      overflow: "hidden",
+    },
+    img: {
+      zIndex: -1,
+      position: "absolute",
+      height: "75vh",
+      widht: "100%",
+      boxShadow: "10px 10px 10em rgba(0, 0, 0, .6)",
     },
   })
 );
@@ -83,7 +132,7 @@ export const SlideshowNFS = ({ play, setPlay, appId, data }: Props) => {
           setPrevIndex(prev);
           return (prev + 1) % totalLen;
         });
-      }, duration);
+      }, duration / 6);
 
       return () => {
         clearInterval(interval);
@@ -91,14 +140,26 @@ export const SlideshowNFS = ({ play, setPlay, appId, data }: Props) => {
     }
   }, [mounted, play, data, duration, totalLen]);
 
-  const backgrounds = data.games.map((slide, ind) => (
-    <ImgTransition
-      play={play}
-      sources={slide.background}
-      duration={duration / slide.background.length}
-      outerIndex={index}
-    />
-  ));
+  // const backgrounds = data.games.map((slide, ind) => (
+  //   <ImgTransition
+  //     play={play}
+  //     sources={slide.background}
+  //     duration={duration / slide.background.length}
+  //     index={innerIndex}
+  //     setIndex={setInnerIndex}
+  //     outerIndex={index}
+  //   />
+  // ));
+  const slides = data.games
+    .map((slide, ind) =>
+      slide.background.map((src, i) => (
+        <div className={classes.container}>
+          <Img src={src} key={`${src}-${i}-bg`} className={classes.imgBg} />
+          <Img src={src} key={`${src}-${i}`} className={classes.img} />
+        </div>
+      ))
+    )
+    .flat(1);
 
   const unknownTx = [
     "Who knows...",
@@ -142,21 +203,26 @@ export const SlideshowNFS = ({ play, setPlay, appId, data }: Props) => {
     </Box>
   );
 
-  const ui = data.games.map((slide, ind) => (
-    <TitlePanels
-      primary={{ name: `#${ind + 1}`, body: slide.game.text }}
-      primaryContent={slide?.rating ? rating(slide.rating) : undefined}
-      secondary={{ name: "Year", body: slide.year }}
-      tertiary={{
-        name: "Sales",
-        body:
-          Number(slide.qty.value) > 0
-            ? `${formatNumber(slide.qty.value, 1000000, 1)} M ${slide.qty.unit}`
-            : unknownTx[Math.floor(Math.random() * unknownTx.length)],
-      }}
-      quaternary={{ name: "Developers", body: slide.developers.join(", ") }}
-    />
-  ));
+  const ui = data.games.map((slide, ind) => {
+    const r = Math.floor(Math.random());
+    const salesAmount = Number(slide.qty.value) > 0
+    ? `${formatNumber(slide.qty.value, 1000000, 1)} M ${slide.qty.unit}`
+    : unknownTx[r * unknownTx.length];
+
+    return slide.background.map(() => (
+      <TitlePanels
+        primary={{ name: `#${ind + 1}`, body: slide.game.text }}
+        primaryContent={slide?.rating ? rating(slide.rating) : undefined}
+        secondary={{ name: "Year", body: slide.year }}
+        tertiary={{
+          name: "Sales",
+          body: salesAmount, 
+        }}
+        quaternary={{ name: "Developers", body: slide.developers.join(", ") }}
+        applyStyle={index % 6 === 0}
+      />
+    ))
+  }).flat(1);
 
   return mounted ? (
     <Grid container justify="center">
@@ -164,18 +230,18 @@ export const SlideshowNFS = ({ play, setPlay, appId, data }: Props) => {
         <Hidden only="xs">
           <Box className={classes.cinema}>
             <Transitions
-              variant={
-                index < prevIndex || (prevIndex === 0 && index === totalLen - 1)
+              variant={index % 6 !== 0 ? "fade-in" :
+                index % 6 === 0 && (index < prevIndex || (prevIndex === 0 && index === totalLen - 1))
                   ? "swipe-cube-to-right"
                   : "swipe-cube-to-left"
               }
-              components={backgrounds}
+              components={slides}
               index={index}
             />
           </Box>
 
           <Transitions
-            variant="fade-in-slide-out"
+            variant={index % 6 === 0 ? "fade-in-slide-out" : "fade-in-slide-out" } 
             components={ui}
             index={index}
           />
@@ -185,10 +251,10 @@ export const SlideshowNFS = ({ play, setPlay, appId, data }: Props) => {
             init={true}
             play={play}
             setPlay={setPlay}
-            index={index}
+            index={Math.floor(index / 6)}
             length={totalLen}
             setIndex={(n: number, prev: number) => {
-              setIndex(n);
+              setIndex(n * 6);
               setPrevIndex(prev);
             }}
             duration={duration}

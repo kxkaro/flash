@@ -96,6 +96,8 @@ interface Props {
     play: boolean;
     sources: Array<string>;
     duration: number;
+    index: number;
+    setIndex: any;
     outerIndex: number;
 }
 
@@ -104,28 +106,31 @@ export const ImgTransition = ({
     play,
     sources,
     duration,
+    index,
+    setIndex,
     outerIndex
 }: Props) => {
     const classes = useStyles();
-    const [index, setIndex] = useState(0);
+    // const [index, setIndex] = useState(0);
     // const [play, setPlay] = useState(true);
 
+    console.log("set interval", index, sources.length)
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            if (play) {
-                setIndex(prev => (prev + 1) % sources.length);
-            }
-        }, duration);
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         if (play) {
+    //             setIndex((prev: number) => (prev + 1) % sources.length);
+    //         }
+    //     }, duration);
 
-        return () => clearInterval(interval);
-    }, [play, duration, sources])
+    //     return () => clearInterval(interval); 
+    // }, [])
 
-    useEffect(() => {
-        if (outerIndex === 0) {
-            setIndex(0);
-        }
-    }, [outerIndex, duration])
+    // useEffect(() => {
+    //     if (outerIndex === 0) {
+    //         setIndex(0);
+    //     }
+    // }, [outerIndex, duration])
 
     return (
         <div className={classes.container}>

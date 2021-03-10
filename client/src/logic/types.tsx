@@ -252,7 +252,7 @@ type Metric =
 // | "Ring System"
 // | "Global Magnetic Field";
 
-type TransitionVariant = "fade-in" | "slide-in" | "fade-in-slide-out" | "swipe-cube-to-left" | "swipe-cube-to-right";
+type TransitionVariant = "none" | "fade-in" | "slide-in" | "fade-in-slide-out" | "swipe-cube-to-left" | "swipe-cube-to-right";
 
 export type {
   Value,

@@ -66,6 +66,7 @@ interface Props {
     secondary: Text;
     tertiary: Text;
     quaternary: Text;
+    applyStyle?: boolean;
 }
 
 export const TitlePanels = ({
@@ -74,6 +75,7 @@ export const TitlePanels = ({
     secondary,
     tertiary,
     quaternary,
+    applyStyle = true,
 }: Props) => {
     const classes = useStyles();
 
@@ -112,7 +114,7 @@ export const TitlePanels = ({
         <Box className={classes.container}>
             <div className={classes.skew}>
                 {[primary, secondary, tertiary, quaternary].map(({ name, body }, i) => (
-                    <NFSPanel key={`anim-${i}`} style={styles[i]}>
+                    <NFSPanel key={`anim-${i}`} style={applyStyle ? styles[i] : undefined}>
                         <Typography color="primary" className={clsx(classes.text, classes.title)}>
                             {name}
                         </Typography>

@@ -60,7 +60,7 @@ export const PlayerInput = ({ duration, setDuration, fullWidth }: Props) => {
             !fullWidth ? classes.narrow : undefined
           }`}
         >
-          Slide duration: {duration / 1000}s
+          Game duration: {duration / 1000}s
         </Typography>
       </Hidden>
       <Hidden xlUp>
