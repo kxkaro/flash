@@ -109,10 +109,10 @@ const createTheme = (type: Mode, appId: string) => {
     typography: {
       ...common.typography,
       fontFamily: [
-        // "Inconsolata", 
-        "Roboto-Mono", 
-        "Open Sans", 
-        "Arial"
+        // "Inconsolata",
+        "Roboto-Mono",
+        "Open Sans",
+        "Arial",
       ].join(","),
     },
   };
@@ -150,9 +150,7 @@ const createTheme = (type: Mode, appId: string) => {
     },
     typography: {
       ...common.typography,
-      fontFamily: ["Goldman-Regular", "Open Sans", "Arial"].join(
-        ","
-      ),
+      fontFamily: ["Goldman-Regular", "Open Sans", "Arial"].join(","),
     },
   };
 
@@ -195,12 +193,20 @@ const createTheme = (type: Mode, appId: string) => {
 
   // Add responsive font sizes and create theme based on selected app
   // If app other than 'SS' or 'NFS' (for example 'undefined'), set DEFAULT theme
-  const theme =
-    appId === "solar-system"
-      ? themeSS
-      : appId === "need-for-speed"
-      ? themeNFS
-      : themeDefault;
+  let theme;
+
+  switch (appId) {
+    case "solar-system":
+      theme = themeSS;
+      break;
+
+    case "need-for-speed":
+      theme = themeNFS;
+      break;
+
+    default:
+      theme = themeDefault;
+  }
 
   return responsiveFontSizes(
     createMuiTheme({
