@@ -14,6 +14,7 @@ import { FlashData } from "../../logic/dataTypes";
 import { formatNumber } from "../../utils/numberFormat";
 import { Rating } from "@material-ui/lab";
 import { Tooltip } from "@material-ui/core";
+import { LoadProgress } from '../navigation/LoadProgress';
 import { SmallScreenMessage } from "./SmallScreenMessage";
 import { NEED_FOR_SPEED } from "../../constants/nfsData";
 
@@ -41,8 +42,9 @@ interface Props {
 export const SlideshowNFS = ({ play, setPlay, appId, data }: Props) => {
   const classes = useStyles();
 
+  // Delay rendering of the slideshow until all images are loaded by the browser to assure the right experience
+  // Without this step the images would not animate properly as they would be still loading while the animations are playing
   const imgLoad = NEED_FOR_SPEED.games.map((el, i) => el.background).flat(1);
-
   const [mounted, setMounted] = useState(false);
   const [mountProgressIndex, setMountProgressIndex] = useState(0);
 
@@ -203,22 +205,6 @@ export const SlideshowNFS = ({ play, setPlay, appId, data }: Props) => {
       </Grid>
     </Grid>
   ) : (
-    <div
-      style={{
-        zIndex: 200,
-        color: "white",
-        width: "100%",
-        height: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column"
-      }}
-    >
-      Loading {mountProgressIndex} / {imgLoad.length}
-      <div style={{ width: "10em", height: "1em", border: "1px solid white", position: "relative" }}>
-          <div style={{ position: "absolute", top: 0, left: 0, bottom: 0, width: `${mountProgressIndex / imgLoad.length * 10}em`, right: "auto", height: "100%", backgroundColor: "white" }} />
-      </div>
-    </div>
+    <LoadProgress index={mountProgressIndex} length={imgLoad.length} />
   );
 };
