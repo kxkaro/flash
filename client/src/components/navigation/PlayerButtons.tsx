@@ -5,6 +5,8 @@ import SkipPreviousIcon from "@material-ui/icons/SkipPrevious";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PauseIcon from "@material-ui/icons/Pause";
 import SkipNextIcon from "@material-ui/icons/SkipNext";
+import FastForwardIcon from '@material-ui/icons/FastForward';
+import FastRewindIcon from '@material-ui/icons/FastRewind';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,16 +44,24 @@ interface Props {
   play: boolean;
   setPlay: any;
   index: number;
+  secondaryIndex?: number;
   length: number;
   setIndex: any;
+  setSecondaryIndex?: any;
+  categoryPrimary?: string;
+  categorySecondary?: string;
 }
 
 export const PlayerButtons = ({
   play,
   setPlay,
   index,
+  secondaryIndex,
   length,
   setIndex,
+  setSecondaryIndex,
+  categoryPrimary = "slide",
+  categorySecondary = "slide",
 }: Props) => {
   const classes = useStyles();
 
@@ -79,10 +89,10 @@ export const PlayerButtons = ({
 
       {/* Previous, next, slide number */}
       <Box className={classes.duration}>
-        <Tooltip title="Previous slide" aria-label="previous slide" arrow>
+        <Tooltip title={`Previous ${categoryPrimary}`} aria-label={`previous ${categoryPrimary}`} arrow>
           <IconButton
             color="inherit"
-            aria-label="previous"
+            aria-label={`previous ${categoryPrimary} icon`}
             onClick={() =>
               setIndex(index > 0 ? index - 1 : length - 1, index)
             }
@@ -92,8 +102,21 @@ export const PlayerButtons = ({
           </IconButton>
         </Tooltip>
 
+        {setSecondaryIndex && secondaryIndex != undefined ? <Tooltip title={`Previous ${categorySecondary}`} aria-label={`previous ${categorySecondary}`} arrow>
+          <IconButton
+            color="inherit"
+            aria-label={`previous ${categorySecondary} icon`}
+            onClick={() =>
+              setSecondaryIndex(secondaryIndex > 0 ? secondaryIndex - 1 : (length * 6) - 1, secondaryIndex)
+            }
+            className={classes.icon}
+          >
+            <FastRewindIcon fontSize="small" />
+          </IconButton>
+        </Tooltip> : undefined}
+
         <Tooltip
-          title={`Slide ${index + 1} out of ${length}`}
+          title={`${categoryPrimary} ${index + 1} out of ${length}`}
           aria-label="slide number"
           arrow
         >
@@ -102,10 +125,23 @@ export const PlayerButtons = ({
           </Typography>
         </Tooltip>
 
-        <Tooltip title="Next slide" aria-label="next slide" arrow>
+        {setSecondaryIndex && secondaryIndex != undefined ? <Tooltip title={`Next ${categorySecondary}`} aria-label={`next ${categorySecondary}`} arrow>
           <IconButton
             color="inherit"
-            aria-label="next"
+            aria-label={`next ${categorySecondary} icon`}
+            onClick={() =>
+              setSecondaryIndex(secondaryIndex < (length * 6) - 1 ? secondaryIndex + 1 : 0, secondaryIndex)
+            }
+            className={classes.icon} 
+          >
+            <FastForwardIcon fontSize="small" />
+          </IconButton>
+        </Tooltip> : undefined}
+
+        <Tooltip title={`Next ${categoryPrimary}`} aria-label={`next ${categoryPrimary}`} arrow>
+          <IconButton
+            color="inherit"
+            aria-label={`next ${categoryPrimary} icon`}
             onClick={() =>
               setIndex(index < length - 1 ? index + 1 : 0, index)
             }

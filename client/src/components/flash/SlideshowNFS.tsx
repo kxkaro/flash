@@ -5,11 +5,11 @@ import {
   createStyles,
   withStyles,
 } from "@material-ui/core/styles";
+import clsx from "clsx";
 import { Img } from "react-image";
 import { Grid, Box, Hidden } from "@material-ui/core";
 import { Player } from "../navigation/Player";
 import { TitlePanels } from "./TitlePanels";
-import { ImgTransition } from "./ImgTransition";
 import { Transitions } from "./Transitions";
 import { FlashData } from "../../logic/dataTypes";
 import { formatNumber } from "../../utils/numberFormat";
@@ -31,33 +31,33 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "100%",
     },
     container: {
-        position: "relative",
+      position: "relative",
+      top: 0,
+      height: "100vh",
+      width: "100%",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      "&::before": {
+        content: "''",
+        position: "absolute",
         top: 0,
-        height: "100vh",
-        width: "100%",
-        display: "flex",
-        justifyContent: "center", 
-        alignItems: "center",
-        '&::before': {
-            content: "''",
-            position: "absolute",
-            top: 0,
-            left: "-20%",
-            right: "-20%",
-            bottom: "auto",
-            height: "12.5vh",
-            backgroundColor: "black",
-        },
-        '&::after': {
-            content: "''",
-            position: "absolute",
-            bottom: 0,
-            left: "-20%",
-            right: "-20%",
-            top: "auto",
-            height: "12.5vh",
-            backgroundColor: "black",
-        },
+        left: "-20%",
+        right: "-20%",
+        bottom: "auto",
+        height: "12.5vh",
+        backgroundColor: "black",
+      },
+      "&::after": {
+        content: "''",
+        position: "absolute",
+        bottom: 0,
+        left: "-20%",
+        right: "-20%",
+        top: "auto",
+        height: "12.5vh",
+        backgroundColor: "black",
+      },
     },
     imgBg: {
       zIndex: -2,
@@ -78,6 +78,31 @@ const useStyles = makeStyles((theme: Theme) =>
       widht: "100%",
       boxShadow: "10px 10px 10em rgba(0, 0, 0, .6)",
     },
+    progress: {
+      zIndex: 10,
+      position: "absolute",
+      top: "-2vh",
+      width: "100%",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "flex-start",
+    },
+    progressItem: {
+      width: "1vh",
+      height: "1vh",
+      borderRadius: "50%",
+      backgroundColor: "rgba(255, 255, 255, .4)",
+      margin: "1em",
+      fontSize: "8px",
+      cursor: "pointer",
+      "&:hover": {
+        backgroundColor: "rgba(255, 255, 255, .87)",
+      },
+      "&$active": {
+        backgroundColor: "rgba(255, 255, 255, .87)",
+      },
+    },
+    active: {},
   })
 );
 
@@ -96,6 +121,7 @@ export const SlideshowNFS = ({ play, setPlay, appId, data }: Props) => {
   const imgLoad = NEED_FOR_SPEED.games.map((el, i) => el.background).flat(1);
   const [mounted, setMounted] = useState(false);
   const [mountProgressIndex, setMountProgressIndex] = useState(0);
+  const imgPerSlide = 6;
 
   useEffect(() => {
     if (!mounted) {
@@ -130,9 +156,9 @@ export const SlideshowNFS = ({ play, setPlay, appId, data }: Props) => {
       const interval = setInterval(() => {
         setIndex((prev) => {
           setPrevIndex(prev);
-          return (prev + 1) % totalLen;
+          return (prev + 1) % (totalLen * imgPerSlide);
         });
-      }, duration / 6);
+      }, duration / imgPerSlide);
 
       return () => {
         clearInterval(interval);
@@ -140,16 +166,6 @@ export const SlideshowNFS = ({ play, setPlay, appId, data }: Props) => {
     }
   }, [mounted, play, data, duration, totalLen]);
 
-  // const backgrounds = data.games.map((slide, ind) => (
-  //   <ImgTransition
-  //     play={play}
-  //     sources={slide.background}
-  //     duration={duration / slide.background.length}
-  //     index={innerIndex}
-  //     setIndex={setInnerIndex}
-  //     outerIndex={index}
-  //   />
-  // ));
   const slides = data.games
     .map((slide, ind) =>
       slide.background.map((src, i) => (
@@ -203,26 +219,29 @@ export const SlideshowNFS = ({ play, setPlay, appId, data }: Props) => {
     </Box>
   );
 
-  const ui = data.games.map((slide, ind) => {
-    const r = Math.floor(Math.random());
-    const salesAmount = Number(slide.qty.value) > 0
-    ? `${formatNumber(slide.qty.value, 1000000, 1)} M ${slide.qty.unit}`
-    : unknownTx[r * unknownTx.length];
+  const ui = data.games
+    .map((slide, ind) => {
+      const r = Math.floor(Math.random());
+      const salesAmount =
+        Number(slide.qty.value) > 0
+          ? `${formatNumber(slide.qty.value, 1000000, 1)} M ${slide.qty.unit}`
+          : unknownTx[r * unknownTx.length];
 
-    return slide.background.map(() => (
-      <TitlePanels
-        primary={{ name: `#${ind + 1}`, body: slide.game.text }}
-        primaryContent={slide?.rating ? rating(slide.rating) : undefined}
-        secondary={{ name: "Year", body: slide.year }}
-        tertiary={{
-          name: "Sales",
-          body: salesAmount, 
-        }}
-        quaternary={{ name: "Developers", body: slide.developers.join(", ") }}
-        applyStyle={index % 6 === 0}
-      />
-    ))
-  }).flat(1);
+      return slide.background.map(() => (
+        <TitlePanels
+          primary={{ name: `#${ind + 1}`, body: slide.game.text }}
+          primaryContent={slide?.rating ? rating(slide.rating) : undefined}
+          secondary={{ name: "Year", body: slide.year }}
+          tertiary={{
+            name: "Sales",
+            body: salesAmount,
+          }}
+          quaternary={{ name: "Developers", body: slide.developers.join(", ") }}
+          applyStyle={index % imgPerSlide === 0}
+        />
+      ));
+    })
+    .flat(1);
 
   return mounted ? (
     <Grid container justify="center">
@@ -230,8 +249,12 @@ export const SlideshowNFS = ({ play, setPlay, appId, data }: Props) => {
         <Hidden only="xs">
           <Box className={classes.cinema}>
             <Transitions
-              variant={index % 6 !== 0 ? "fade-in" :
-                index % 6 === 0 && (index < prevIndex || (prevIndex === 0 && index === totalLen - 1))
+              variant={
+                index % imgPerSlide !== 0
+                  ? "fade-in"
+                  : index % imgPerSlide === 0 &&
+                    (index < prevIndex ||
+                      (prevIndex === 0 && index === (totalLen * imgPerSlide) - 1))
                   ? "swipe-cube-to-right"
                   : "swipe-cube-to-left"
               }
@@ -241,7 +264,7 @@ export const SlideshowNFS = ({ play, setPlay, appId, data }: Props) => {
           </Box>
 
           <Transitions
-            variant={index % 6 === 0 ? "fade-in-slide-out" : "fade-in-slide-out" } 
+            variant={index % imgPerSlide === 0 ? "fade-in-slide-out" : "none"}
             components={ui}
             index={index}
           />
@@ -251,10 +274,15 @@ export const SlideshowNFS = ({ play, setPlay, appId, data }: Props) => {
             init={true}
             play={play}
             setPlay={setPlay}
-            index={Math.floor(index / 6)}
+            index={Math.floor(index / imgPerSlide)}
+            secondaryIndex={index}
             length={totalLen}
             setIndex={(n: number, prev: number) => {
-              setIndex(n * 6);
+              setIndex(n * imgPerSlide);
+              setPrevIndex(prev);
+            }}
+            setSecondaryIndex={(n: number, prev: number) => {
+              setIndex(n);
               setPrevIndex(prev);
             }}
             duration={duration}
@@ -262,8 +290,31 @@ export const SlideshowNFS = ({ play, setPlay, appId, data }: Props) => {
             labels={labels}
             sequences={sequences}
             setBgIndex={() => ""}
+            categoryPrimary="game"
+            categorySecondary="image"
           />
         </Hidden>
+
+        {/* Secondary progress indicator */}
+        <div className={classes.progress}>
+          {new Array(imgPerSlide).fill(null).map((el, i) => (
+            <span
+              key={i}
+              className={clsx(classes.progressItem, {
+                [classes.active]: i === index % imgPerSlide,
+              })}
+              onClick={() => {
+                if (i !== (index % imgPerSlide)) {
+                  setIndex((prev: number) => {
+                    setPrevIndex(prev);
+                    return prev - (prev % imgPerSlide) + i;
+                  })
+                }
+                
+              }}
+            />
+          ))}
+        </div>
 
         <Hidden smUp>
           <SmallScreenMessage variant="NFS" />

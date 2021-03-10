@@ -42,14 +42,18 @@ interface Props {
   play: boolean;
   setPlay: any;
   index: number;
+  secondaryIndex?: number;
   length: number;
   setIndex: any;
+  setSecondaryIndex?: any;
   duration: number;
   setDuration: any;
   labels?: Array<string>;
   sequences: Array<string>;
   bgIndex?: number;
   setBgIndex: any;
+  categoryPrimary?: string;
+  categorySecondary?: string;
 }
 
 export const Player = ({
@@ -58,14 +62,18 @@ export const Player = ({
   play,
   setPlay,
   index,
+  secondaryIndex,
   length,
   setIndex,
+  setSecondaryIndex,
   duration,
   setDuration,
   labels,
   sequences,
   bgIndex,
   setBgIndex,
+  categoryPrimary,
+  categorySecondary,
 }: Props) => {
   const classes = useStyles();
 
@@ -160,7 +168,11 @@ export const Player = ({
                 setPlay={setPlay}
                 index={index}
                 setIndex={setIndex}
+                secondaryIndex={secondaryIndex}
+                setSecondaryIndex={setSecondaryIndex}
                 length={length}
+                categoryPrimary={categoryPrimary}
+                categorySecondary={categorySecondary}
               />
 
               {/* Slide duration - small version of the component for small screens */}
