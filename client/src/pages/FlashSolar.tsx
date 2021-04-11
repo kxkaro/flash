@@ -43,7 +43,7 @@ const Flash = ({
     // Delay play until entry animations are finished
     if (!init && data) {
       const timeout = setTimeout(() => {
-        setPlay(true);
+        // setPlay(true);
         setInit(true);
       }, 5000);
 
