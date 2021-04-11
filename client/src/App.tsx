@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 // import Logout from "./pages/Logout";
 import Landing from "./pages/Landing";
@@ -55,7 +55,7 @@ class App extends Component<{}, State> {
     const { root } = PATHS;
 
     return (
-      <Router basename="/" hashType="slash">
+      <Router basename="/">
         <ScrollToTop>
           <Switch>
             {/*

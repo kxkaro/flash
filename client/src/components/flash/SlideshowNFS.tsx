@@ -247,7 +247,7 @@ export const SlideshowNFS = ({ play, setPlay, appId, data }: Props) => {
   return mounted ? (
     <Grid container justify="center">
       <Grid container item className={classes.content}>
-        <Hidden only="xs">
+        <Hidden smDown>
           <Box className={classes.cinema}>
             <Transitions
               variant={
@@ -293,30 +293,30 @@ export const SlideshowNFS = ({ play, setPlay, appId, data }: Props) => {
             categoryPrimary="game"
             categorySecondary="image"
           />
+
+          {/* Secondary progress indicator */}
+          <div className={classes.progress}>
+            {new Array(imgPerSlide).fill(null).map((el, i) => (
+              <span
+                key={i}
+                className={clsx(classes.progressItem, {
+                  [classes.active]: i === index % imgPerSlide,
+                })}
+                onClick={() => {
+                  if (i !== (index % imgPerSlide)) {
+                    setIndex((prev: number) => {
+                      setPrevIndex(prev);
+                      return prev - (prev % imgPerSlide) + i;
+                    })
+                  }
+                  
+                }}
+              />
+            ))}
+          </div>
         </Hidden>
 
-        {/* Secondary progress indicator */}
-        <div className={classes.progress}>
-          {new Array(imgPerSlide).fill(null).map((el, i) => (
-            <span
-              key={i}
-              className={clsx(classes.progressItem, {
-                [classes.active]: i === index % imgPerSlide,
-              })}
-              onClick={() => {
-                if (i !== (index % imgPerSlide)) {
-                  setIndex((prev: number) => {
-                    setPrevIndex(prev);
-                    return prev - (prev % imgPerSlide) + i;
-                  })
-                }
-                
-              }}
-            />
-          ))}
-        </div>
-
-        <Hidden smUp>
+        <Hidden mdUp>
           <SmallScreenMessage variant="NFS" />
         </Hidden>
       </Grid>
