@@ -1,4 +1,5 @@
 import React from "react";
+import clsx from "clsx";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { Box, Typography } from "@material-ui/core";
 import Ticker from "react-ticker";
@@ -90,14 +91,14 @@ export const FooterTicker = ({
         value.map((value, i) => (
           <Typography
             key={`${key}-${i}`}
-            className={`${classes.textContainer} ${classes.tickerText}`}
+            className={clsx(classes.textContainer, classes.tickerText)}
           >
             {/* Display header only before the first section */}
             {i === 0 && ind === 0 ? (
               <Typography
                 component="span"
                 color="secondary"
-                className={`${classes.country} ${classes.tickerText}`}
+                className={clsx(classes.country, classes.tickerText)}
               >
                 {`${keyHeader} // `}
               </Typography>
@@ -108,7 +109,7 @@ export const FooterTicker = ({
               <Typography
                 component="span"
                 color="textSecondary"
-                className={`${classes.country} ${classes.tickerText}`}
+                className={clsx(classes.country, classes.tickerText)}
               >
                 {`${key}: `}
               </Typography>
@@ -119,7 +120,7 @@ export const FooterTicker = ({
             {value?.primary && (
               <Typography
                 component="span"
-                className={`${classes.KPI} ${classes.tickerText}`}
+                className={clsx(classes.KPI, classes.tickerText)}
               >
                 {value?.primaryFormatted
                   ? value.primaryFormatted
@@ -127,13 +128,10 @@ export const FooterTicker = ({
                 {value?.primaryDelta || value?.primaryDeltaFormatted ? (
                   <Typography
                     component="span"
-                    className={`${
-                      value?.primaryIsGood
-                        ? classes.deltaPos
-                        : value?.primaryIsBad
-                        ? classes.deltaNeg
-                        : undefined
-                    } ${classes.tickerText}`}
+                    className={clsx(classes.tickerText, {
+                      [classes.deltaPos]: value?.primaryIsGood,
+                      [classes.deltaNeg]: value?.primaryIsBad,
+                    })}
                   >
                     {value.primaryDelta !== 0
                       ? ` (${
@@ -150,7 +148,7 @@ export const FooterTicker = ({
             {/* Separator, full circle */}
             <Typography
               component="span"
-              className={`${classes.separator} ${classes.tickerText}`}
+              className={clsx(classes.separator, classes.tickerText)}
             />
           </Typography>
         ))
@@ -164,7 +162,7 @@ export const FooterTicker = ({
   // once the data is fully loaded
   const title = (
     <Typography
-      className={`${classes.textContainer} ${classes.tickerText} ${classes.title}`}
+      className={clsx(classes.textContainer, classes.title, classes.tickerText)}
     >
       {text}
     </Typography>

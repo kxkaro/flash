@@ -28,7 +28,7 @@ Props) => {
   id = id?.toLowerCase();
 
   // Delay the transitions 5 seconds, when all CSS transitions are finished
-  let [play, setPlay] = useState(true);
+  let [play, setPlay] = useState(false);
 
   const appId = id as string;
 
