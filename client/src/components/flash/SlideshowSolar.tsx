@@ -18,9 +18,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     chartContainer: {
       height: "100%",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
     },
     divider: {
       marginTop: ".5em",
@@ -94,8 +91,11 @@ export const SlideshowSolar = ({
         {[...(slide.data.get(name)?.main.entries() || [])].map(
           ([key, val], i) =>
             val.type === "bar-chart" ? (
-              <Box
+              <Grid
                 key={`chart-${name}-${key}-${i}`}
+                container
+                justify="center"
+                alignItems="center"
                 className={classes.chartContainer}
               >
                 <BarChart
@@ -123,7 +123,7 @@ export const SlideshowSolar = ({
                   unit={"k€"}
                   maxRows={getMaxRows(index)}
                 />
-              </Box>
+              </Grid>
             ) : val.type === "items" && val.data.length > 0 ? (
               <ImgTiles key={`items-${name}-${ind}-${i}`} data={val.data} />
             ) : undefined
