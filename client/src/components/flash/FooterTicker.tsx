@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
       textAlign: "center",
     },
     tickerText: {
-      fontSize: theme.fontSizes.primary,
+      fontSize: '3.25vh',
       [theme.breakpoints.down("sm")]: {
         fontSize: theme.fontSizes.tertiary,
       },
