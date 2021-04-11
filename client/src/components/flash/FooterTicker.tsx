@@ -65,6 +65,12 @@ const useStyles = makeStyles((theme: Theme) =>
       fontWeight: "bold",
       color: theme.palette.error.main,
     },
+    colPrimary: {
+      color: theme.palette.primary.main,
+    },
+    colSecondary: {
+      color: theme.palette.secondary.main,
+    },
   })
 );
 
@@ -89,45 +95,39 @@ export const FooterTicker = ({
     ?.map(([keyHeader, valueHeader], indHeader) =>
       [...valueHeader.entries()]?.map(([key, value], ind) =>
         value.map((value, i) => (
-          <Typography
+          <p
             key={`${key}-${i}`}
             className={clsx(classes.textContainer, classes.tickerText)}
           >
             {/* Display header only before the first section */}
             {i === 0 && ind === 0 ? (
-              <Typography
-                component="span"
-                color="secondary"
-                className={clsx(classes.country, classes.tickerText)}
+              <span
+                className={clsx(classes.country, classes.colSecondary, classes.tickerText)}
               >
                 {`${keyHeader} // `}
-              </Typography>
+              </span>
             ) : undefined}
 
             {/* Display header only before the first item */}
             {i === 0 && (
-              <Typography
-                component="span"
-                color="textSecondary"
-                className={clsx(classes.country, classes.tickerText)}
+              <span
+                className={clsx(classes.country, classes.colSecondary, classes.tickerText)}
               >
                 {`${key}: `}
-              </Typography>
+              </span>
             )}
 
             {`${value.name}: `}
 
             {value?.primary && (
-              <Typography
-                component="span"
+              <span
                 className={clsx(classes.KPI, classes.tickerText)}
               >
                 {value?.primaryFormatted
                   ? value.primaryFormatted
                   : value.primary}
                 {value?.primaryDelta || value?.primaryDeltaFormatted ? (
-                  <Typography
-                    component="span"
+                  <span
                     className={clsx(classes.tickerText, {
                       [classes.deltaPos]: value?.primaryIsGood,
                       [classes.deltaNeg]: value?.primaryIsBad,
@@ -140,17 +140,16 @@ export const FooterTicker = ({
                             : value.primaryDelta
                         })`
                       : undefined}
-                  </Typography>
+                  </span>
                 ) : undefined}
-              </Typography>
+              </span>
             )}
 
             {/* Separator, full circle */}
-            <Typography
-              component="span"
+            <span
               className={clsx(classes.separator, classes.tickerText)}
             />
-          </Typography>
+          </p>
         ))
       )
     )
