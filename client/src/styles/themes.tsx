@@ -110,7 +110,7 @@ const createTheme = (type: Mode, appId: string) => {
       ...common.typography,
       fontFamily: [
         // "Inconsolata",
-        "Roboto-Mono",
+        "Roboto Mono",
         "Open Sans",
         "Arial",
       ].join(","),
