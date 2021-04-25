@@ -46,7 +46,6 @@ interface Props {
   length: number;
   labels: Array<string>;
   bgIndex?: number;
-  setBgIndex?: any;
   sequences: Array<string>;
 }
 

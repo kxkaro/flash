@@ -194,7 +194,6 @@ export const Player = ({
                 setIndex={setIndex}
                 labels={labels || []}
                 bgIndex={bgIndex}
-                setBgIndex={setBgIndex}
                 sequences={sequences}
               />
 

@@ -90,7 +90,7 @@ const Flash = ({
   }
   // Pick an image if appId matches any of the defined image lists, else undefined
   let img: Img | undefined;
-  if (bgIndex) {
+  if (bgIndex != undefined && bgIndex >= 0) {
     Object.entries(images).forEach(([key, imgArr]) => {
       if (key === appId) {
         img = imgArr[bgIndex];
@@ -102,7 +102,7 @@ const Flash = ({
     <ThemeWrapper mode={mode} appId={appId}>
       <Box className={classes.bg}>
         {/* Background: picture and after effects */}
-        {img && bgIndex ? (
+        {(img && bgIndex != undefined && bgIndex >= 0) ? (
           <Box className={classes.screen}>
             <SuspenseImg
               alt={`background-${appId}`}

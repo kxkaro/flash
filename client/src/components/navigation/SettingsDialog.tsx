@@ -86,7 +86,7 @@ export const SettingsDialog = ({
 
       <DialogContent>
         {/* Background image */}
-        {bgIndex ? <>
+        {(bgIndex != undefined && bgIndex >= 0) ? <>
           <DialogContentText>Change background</DialogContentText>
 
           <div className={classes.root}>
