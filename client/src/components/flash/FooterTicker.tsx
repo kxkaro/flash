@@ -13,6 +13,9 @@ const useStyles = makeStyles((theme: Theme) =>
       bottom: "0",
       height: "12.5vh",
       color: "rgba(255, 255, 255, .87)",
+      '& p': {
+        fontSize: '3.25vh',
+      },
       "&::before": {
         content: "''",
         position: "absolute",
@@ -30,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
       textAlign: "center",
     },
     tickerText: {
-      fontSize: '3.25vh',
+      // fontSize: '3.25vh',
       [theme.breakpoints.down("sm")]: {
         fontSize: theme.fontSizes.tertiary,
       },
