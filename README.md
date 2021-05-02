@@ -1,4 +1,4 @@
-# retail-flash
+# flash
 
 This application is an automated transitioning presentation
 of data around various topics:
